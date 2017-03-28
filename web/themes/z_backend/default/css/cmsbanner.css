@@ -1,0 +1,26 @@
+table.listParent{border-collapse: collapse;}
+table.listParent > thead > tr > th {
+    background: #444;
+    border: 1px solid #dfdfdf;
+    color: #fff;
+    padding: 8px;
+}
+table.listParent > tbody > tr > td {border: 1px solid #dfdfdf;}
+.listChild{background:#eee;}	
+
+.tableChild{display:none;}
+.toggle{width:20px;height:20px;background:url(../images/icons/icon_expand.png) no-repeat scroll center center;}
+.toggle.active{background:url(../images/icons/icon_collapse.png) no-repeat scroll center center;}
+
+.txtLeft{text-align:left}
+.txtCenter{text-align:center}
+.txtRight{text-align:right}
+.txtTop{vertical-align:top}
+.txtMiddle{vertical-align:middle}
+.txtBottom{vertical-align:bottom}
+
+.marginCenter{margin:0 auto;}
+
+table.listTable td{border:1px solid #dfdfdf !important;}
+.listChild{background:#eee;}
+.textpadd{padding:0 0 8px 0;}

@@ -1,0 +1,231 @@
+/*#################DASHBOARD#################*/
+a.thumbnail:hover {text-decoration: none;}
+a.thumbnail {padding-top: 10px;}
+.list-group-item a {outline: none; text-decoration: none; color: #444;}
+.list-group-item a:hover {text-decoration: none; color: #444;}
+.left-menu-cat{background: #EEEEEE; cursor:hand; cursor:pointer;}
+body{background: #ccc;}
+.wrap > .container {background: #fff;}
+.footer {background: #444; color: #fff;}
+.list-group-item.left-menu > a {display: block; padding: 10px 15px;}
+.left-menu{background: #EEEEEE; padding: 0;}
+
+.left-submenu-list .list-group-item:first-child {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.brand-logo img{
+  	 width:230px;
+  	 height:auto;
+  	 margin-top:-10px;
+}
+
+.breadcrumbs{	 
+	  background-color:#ccc;
+}
+
+.panel .panel-heading
+{
+    background: #efefef none repeat scroll 0 0;
+    border-bottom: 1px solid #bdbdbd;
+    padding: 10px 20px;
+}
+
+.panel .panel-heading h1.panel-title
+{ 
+    font-weight: bold;
+}
+
+.panel-heading > h1{
+ display:inline;	
+}
+
+.content-div{
+	background-color: #ffffff;
+    border: 1px solid #ced2d2;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    width: 100%;    
+}
+
+.content-div a{
+	 text-decoration:none!important;
+	 margin:0px auto;
+}
+
+.content-div > div > div{
+ padding:10px;	
+}
+
+.dashboard {
+    background: none repeat scroll 0 0 #EEEEEE;
+    border: 1px solid #cacaca;    
+    height: 140px;
+    margin: 25px;
+    padding: 35px 15px;
+    width: 140px;
+    display:inline-table;
+}
+
+.dashboard div{
+	text-align:center;	 
+}
+
+.icon{ 
+	margin: 0 auto 15px;
+}
+
+.grid-view{
+clear:both;	
+}
+
+.portlet{
+	margin: 0 0 10px; 
+	box-shadow: -1px 2px 7px #bababa;	
+}
+
+.portlet-decoration {
+	background: url(../images/bg_admin_menu.png) repeat-x;
+	border-left: 0;
+	padding: 5px 8px;
+}
+
+.portlet-title {
+    color: #000000;
+    font-size: 12px;
+    font-weight: bold;
+    height: 26px;
+    height:auto;
+    padding:8px 5px;
+    padding: 5px;    
+}
+
+.portlet-content{
+	background:#f9f9f9;
+	margin:0 0 10px;
+	padding: 5px 8px; 
+}
+
+.portlet-content ul{
+	margin:0 0 0 15px;
+	padding:0px;
+}
+
+.operations li{
+	color: #000000;  
+    border-bottom: 1px solid #bdbdbd;
+    display: block;
+    padding:2px 2px;
+}
+
+.operations li:last-child {
+	color: #000000;
+    border-bottom: none;
+    display: block;
+}
+.operations li a {
+    color: #000000 !important;
+    font: 13px/15px Arial;
+    text-decoration:none;     
+}
+
+.operations li a:hover {
+	color:#000000;
+	background:#FFFFFF;	
+}
+
+/*------------ Theme section-------------------*/
+/*.form-group{
+display:table;
+width:100%;	
+}
+
+.form-group	.control-label{
+	 display:table-cell;
+	 width:30%;
+}
+
+.form-group	.form-control{
+ display:table-cell;
+}
+*/
+
+
+
+.btn-position-right{
+	 float:right;
+	 margin:0px 10px 8px 4px !important;
+}
+
+.glyphicon{
+	margin:4px;	
+}
+.checkbox-list-div{	 
+	 height:115px;
+	 overflow: auto;
+	 border:1px solid #ccc;
+	 padding:5px;
+}
+.checkbox-list-div label{
+	 display:table-row;
+}
+
+.toggle{width:20px;height:20px;background:url(../images/icons/icon_expand.png) no-repeat scroll center center;}
+.toggle.active{background:url(../images/icons/icon_collapse.png) no-repeat scroll center center;}
+.marginCenter{margin:0 auto;}
+
+/*.grid-view .table td:last-child{
+	 text-align:center !important;
+}
+*/
+.collapseSection{
+ 	background: #eee;
+}
+/*----- Admin user Management---------------*/
+.change-password {
+    background: #eee none repeat scroll 0 0;
+    border: 1px solid #ebebeb;
+    color: #393939;
+    margin: 20px 0;
+    padding: 10px 0;
+}
+
+.bg-PermissionModel{padding: 0px 8px 0; border-bottom: solid 1px #666; border-top: solid 1px #666; line-height: 27px; margin-top: 20px; clear:both; overflow:hidden; background: #eee;}
+
+/*---------ORDER MANAGEMENT-------------------*/
+.item-imagebox
+{
+	padding-bottom:10px;
+	padding-top:10px;
+}
+.item-imagebox-add
+{
+	padding-top:10px;
+}
+
+.grid-view > table > thead > tr > th {background: #D9EDF7;}
+.grid-view > table > thead > tr > td {background: #eeeeee;}
+
+ul.breadcrumb {background: #D9EDF7;}
+.left-col {background: #cccccc; padding: 10px;}
+
+.grid-view .grid-view > table > thead > tr > th {background: #999999;}
+.grid-view .grid-view > table > thead > tr > th > a {color: #ffffff;}
+
+.grid-view .btn-success {
+    background-color: #5bc0de;
+    border-color: #46b8da;
+}
+
+#menu-tree tr.tree-level0 td{color:#ff0000;padding-top:20px;}
+#menu-tree tr.tree-level0:first-child td{padding-top:0;}
+#menu-tree tr.tree-level1 td{color:#009900;padding-left:20px;}
+#menu-tree tr.tree-level2 td{color:#4444ff;padding-left:40px;}
+#menu-tree tr.tree-level3 td{color:#444444;padding-left:60px;}
+#menu-tree .glyphicon {font-size: 8px; padding: 3px; border-radius: 8px;}
+#menu-tree .add .glyphicon {color:#FFA500; border: 1px solid #FFA500;}
+#menu-tree .edit .glyphicon {color:#008080; border: 1px solid #008080;}
+#menu-tree .delete .glyphicon {color:#ff4444; border: 1px solid #ff4444;}
+
+.admdashboard .panel .panel-body .row {margin: 0;}

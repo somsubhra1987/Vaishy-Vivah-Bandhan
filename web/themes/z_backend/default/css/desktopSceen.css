@@ -1,0 +1,13 @@
+.sizeT{width: 50px;}
+.sizeS{width: 100px;}
+.sizeSM{width: 150px;}
+.sizeM{width: 200px;}
+.sizeML{width: 250px;}
+.sizeL{width: 300px;}
+.sizeXL{width: 360px;}
+.sizeXXL{width: 400px;}
+
+textarea.sizeML{height: 40px;}
+textarea.sizeL{height: 60px;}
+textarea.sizeXL{height: 120px;}
+textarea.sizeXXL{height: 200px;}

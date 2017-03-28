@@ -1,0 +1,30 @@
+<?php
+/* @var $this \yii\web\View */
+/* @var $content string */
+use yii\helpers\Html;
+use app\assets\AppAsset;
+use app\lib\core\Cms;
+
+AppAsset::register($this);
+
+?>
+<?php $this->beginPage() ?>
+<!DOCTYPE html>
+<html lang="<?= Yii::$app->language ?>">
+<head>
+	<title>Vivah Bandhan</title>
+	 
+  <meta charset="<?= Yii::$app->charset ?>">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <?= Html::csrfMetaTags() ?>    
+
+  <?php $this->head() ?>    
+  <?php echo $this->registerCssFile(Yii::$app->request->baseUrl.'/themes/frontend/vivahBandhan/css/style.css', ['depends' => [yii\bootstrap\BootstrapAsset::className()]]);?>
+  <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
+  <link rel="shortcut icon" href="<?php echo Yii::$app->request->baseUrl; ?>/favicon.ico" type="image/x-icon" />  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<?php $this->beginBody() ?>
+
+<div id="wraper">
