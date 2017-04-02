@@ -26,7 +26,7 @@ use app\lib\Core;
             {
             ?>           
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="border-right:none;"> My Home   <span class="fa fa-angle-down"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" style="border-right:none;"> My Home   <span class="fa fa-angle-down"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="<?=Yii::$app->homeUrl?>member">My Profile</a></li>    
                     <li><a href="#">Who View My Profile</a></li>  
