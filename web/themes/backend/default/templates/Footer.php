@@ -1,7 +1,7 @@
 </div><!-- wrap -->
 <footer class="footer">
     <div class="container">
-        <p class="text-center">&copy; myUKmailbox.com <?= date('Y') ?></p>
+        <p class="text-center">&copy; vaishyvivahbandhan.com <?= date('Y') ?></p>
     </div>
 </footer>
 

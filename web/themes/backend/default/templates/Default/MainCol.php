@@ -1,13 +1,13 @@
 <?php
 use yii\widgets\Breadcrumbs;
-use app\lib\core\App;
+use app\lib\Core;
 ?>
 <div class="container">
 <?php echo Breadcrumbs::widget([
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         'homeLink' => [
         				'label' => "Dashboard",
-        				'url' => App::getRootUrl() . "/admin/dashboard"
+        				'url' => Core::getRootUrl() . "/admin/dashboard"
         			],
     ]) 
 ?>

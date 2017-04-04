@@ -5,7 +5,7 @@ use yii\bootstrap\NavBar;
 use app\lib\core\App;
 
 NavBar::begin([
-'brandLabel' => Html::img('@web/images/logo.png', ['alt'=>Yii::$app->name]),
+'brandLabel' => Html::img('@web/themes/backend/default/images/logo.png', ['alt'=>Yii::$app->name]),
 'brandOptions' => ['class' => 'brand-logo'],
 'brandUrl' => Yii::$app->urlManager->createUrl(['/admin/dashboard']),
 'options' => [

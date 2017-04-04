@@ -139,6 +139,25 @@ return $error;
 		return $data;
 	}
 
+	function getRow($sql, $placeholders=false)
+	{
+		$db = Yii::$app->db;
+		$cmd = $db->createCommand($sql);
+		
+		if(is_array($placeholders))
+		{
+			foreach($placeholders as $name=>$value)
+			{
+				$name = trim($name);
+				if(substr($name, 0, 1) != ":") $name = ":" . $name;
+			
+				$cmd->bindValue($name, $value);	
+			}
+		}
+				
+		$row = $cmd->queryOne();		
+		return $row;
+	}
 	function getRows($sql, $placeholders=false)
 	{
 		$db = Yii::$app->db;
@@ -257,7 +276,45 @@ return $error;
 			return 'Male';
 		}
 	}
-}
-	
 
+	function getLoggedAdmin()
+    {
+	    $admin = new \StdClass();
+	    $admin->adminID = Yii::$app->session['loggedAdminID'];
+	    
+	    $sql = "SELECT
+	    			AG.adminGroupCode,
+	    			AG.super,
+	    			AG.adminGroupID,
+	    			AG.adminGroupCode,
+	    			A.username,
+	    			CONCAT(A.firstName, ' ', A.lastName) AS adminName
+	    		FROM app_admin A
+	    			INNER JOIN app_admin_group AG USING(adminGroupID)
+	    		WHERE A.adminID = :adminID ";
+	    $row = self::getRow($sql, array('adminID'=>$admin->adminID));
+	    
+	    $admin->groupCode = $row['adminGroupCode'];
+	    $admin->superFlag =$row['super'];
+	    $admin->username =$row['username'];
+	    $admin->groupID =$row['adminGroupID'];
+	    $admin->name =$row['adminName'];
+	    $admin->groupCode =$row['adminGroupCode'];
+	    
+	    return $admin;
+    }
+
+    function getModuleName($moduleCode)
+	{		
+			$sql = "SELECT moduleName FROM app_module WHERE moduleCode = '$moduleCode'";
+			return self::getData($sql);
+	}
+	
+	function getControllerName($controllerID)
+	{	
+			$sql = "SELECT controllerName FROM app_controller WHERE controllerID = '$controllerID'";			
+			return self::getData($sql);
+	}
+	
+}
 ?>

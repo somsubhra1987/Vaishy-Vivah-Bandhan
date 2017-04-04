@@ -1,15 +1,15 @@
 <?php
-use app\lib\core\App;
-use app\lib\core\Cms;
-if(App::getLoggedAdmin()->adminID)
+use app\lib\Core;
+use app\lib\Cms;
+if(Core::getLoggedAdmin()->adminID)
 {
 	//App::printR(App::getLoggedAdmin());
 
-	if(App::getLoggedAdmin()->superFlag) 
+	if(Core::getLoggedAdmin()->superFlag) 
 	{
 		echo Cms::getLeftMenuHtml('rp_admin');
 	}
-	elseif(App::getLoggedAdmin()->groupCode == 'blog_admin') 
+	elseif(Core::getLoggedAdmin()->groupCode == 'blog_admin') 
 	{		
 		echo Cms::getLeftMenuHtml('blog_admin');
 	}
