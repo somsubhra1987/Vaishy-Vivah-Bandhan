@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use app\lib\CustomHtml;
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\admin\models\UserMasterSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -11,18 +11,13 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-master-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create User Master', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+   <?=CustomHtml::getAddNewButton()?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
-
+            CustomHtml::getEditActionIcon(),
             //'userID',
             'profileID',
             'firstName',
@@ -46,8 +41,8 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'age',
             // 'physicalStatus',
             // 'isActive',
-
-            ['class' => 'yii\grid\ActionColumn'],
+             CustomHtml::getDeleteActionIcon(),
+            //['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 </div>
