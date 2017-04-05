@@ -1,8 +1,8 @@
 <?php
-use app\lib\core\App;
+use app\lib\Core;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use app\modules\admin\cms\models\CmsMenu;
+use app\modules\admin\models\CmsMenu;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\cms\models\CmsMenu */
@@ -31,9 +31,9 @@ use app\modules\admin\cms\models\CmsMenu;
 
     <?php echo $form->field($model, 'parentID')->DropDownList($model->getMenuDropdownAssoc(),['prompt'=> '==Select=='])?>
     
-    <?php echo $form->field($model, 'moduleCode')->DropDownList(App::getModuleAssoc(),['prompt'=> '==Select==',
+    <?php echo $form->field($model, 'moduleCode')->DropDownList(Core::getModuleAssoc(),['prompt'=> '==Select==',
     'onchange'=>'
-                $.post( "'.Yii::$app->urlManager->createUrl(['admin/cms/menu/getcontrollerbymodule?moduleCode=']).'"+$(this).val(), function( data ) {
+                $.post( "'.Yii::$app->urlManager->createUrl(['admin/menu/getcontrollerbymodule?moduleCode=']).'"+$(this).val(), function( data ) {
                   $( "#cmsmenu-controllerid" ).html( data );
                 });
             ',

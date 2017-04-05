@@ -60,7 +60,7 @@ $config = [
         'enablePrettyUrl' => true,
         'showScriptName' => false,
         'rules' => [
-
+                'admin/logout'=> 'admin/default/logout',
             ],
         ]
     ],

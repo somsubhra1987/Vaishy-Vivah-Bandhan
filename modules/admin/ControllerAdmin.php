@@ -4,7 +4,7 @@ use Yii;
 use yii\filters\AccessControl;
 use app\lib\AdminAccessRule;
 
-class Controller extends \yii\web\Controller
+class ControllerAdmin extends \yii\web\Controller
 {
 	/**
 	 * Specifies the access control rules.

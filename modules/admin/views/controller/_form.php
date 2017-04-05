@@ -1,5 +1,5 @@
 <?php
-use app\lib\core\App;
+use app\lib\Core;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
     $ajaxUrl = Yii::$app->urlManager->createUrl('admin/controller/modulecontroller');
     ?>
 
-    <?= $form->field($model, 'moduleCode')->dropDownList(App::getModuleAssoc(),['prompt'=>'==Select==',
+    <?= $form->field($model, 'moduleCode')->dropDownList(Core::getModuleAssoc(),['prompt'=>'==Select==',
     'onchange'=>"
 			$.ajax({
 				    type     :'POST',
@@ -29,7 +29,7 @@ use yii\widgets\ActiveForm;
     ",
     ]) ?>
 
-    <?= $form->field($model, 'controllerName')->dropDownList(App::getModuleControllerAssoc($model->moduleCode), ['prompt'=>'==Select==']) ?>
+    <?= $form->field($model, 'controllerName')->dropDownList(Core::getModuleControllerAssoc($model->moduleCode), ['prompt'=>'==Select==']) ?>
 	
     <?= $form->field($model, 'active')->checkbox() ?>
 

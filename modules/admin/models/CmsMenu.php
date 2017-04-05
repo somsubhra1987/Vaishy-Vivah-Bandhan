@@ -1,9 +1,9 @@
 <?php
 
-namespace app\modules\admin\cms\models;
+namespace app\modules\admin\models;
 
 use Yii;
-use app\lib\core\App; 
+use app\lib\Core; 
 /**
  * This is the model class for table "cms_menu".
  *
@@ -119,7 +119,7 @@ class CmsMenu extends \yii\db\ActiveRecord
 					WHERE moduleCode = '$moduleCode'
 				ORDER BY controllerName";
 				
-		return App::getDropdownAssoc($sql);
+		return Core::getDropdownAssoc($sql);
 	}
 	
 	function getParentMenuTitleByID($parentID)
@@ -139,7 +139,7 @@ class CmsMenu extends \yii\db\ActiveRecord
 		$sql = "SELECT COUNT(menuID)
 				FROM cms_menu
 				WHERE parentID = :menuID";
-		$count = App::getData($sql, ['menuID'=>$menuID]);
+		$count = Core::getData($sql, ['menuID'=>$menuID]);
 		
 		if($count) return true;
 		

@@ -5,14 +5,14 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\modules\admin\models\CmsMenu;
 use app\modules\admin\models\CmsMenuSearch;
-use app\modules\admin\Controller;
+use app\modules\admin\ControllerAdmin;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * MenuController implements the CRUD actions for CmsMenu model.
  */
-class MenuController extends Controller
+class MenuController extends ControllerAdmin
 {
     /**
      * Lists all CmsMenu models.
