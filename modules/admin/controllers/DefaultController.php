@@ -33,6 +33,10 @@ class DefaultController extends Controller
         ]);
     }
 
+    public function actionDashboard(){
+        return $this->render('index');
+    }
+
     public function actionLogout()
     {
         Yii::$app->user->logout();

@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\lib\Core;
+use yii\jui\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\UserMaster */
@@ -10,21 +12,19 @@ use yii\widgets\ActiveForm;
 
 <div class="user-master-form">
 
-    <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'profileID')->textInput(['maxlength' => true]) ?>
-
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    <?php
+    echo $form->errorSummary($model);
+    ?>
     <?= $form->field($model, 'firstName')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'lastName')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'gender')->dropDownList(['Male'=>'Male', 'Female'=>'Female'], ['prompt' => '=Select=']); ?>
 
-    <?= $form->field($model, 'gender')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'dob')->textInput() ?>
+    <?= $form->field($model, 'dob')->widget(DatePicker::classname(), ['dateFormat' => 'yyyy-MM-dd', 'options' => ['class' => 'form-control']]) ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'userPassword')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'userPassword')->passwordInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'phoneNo')->textInput(['maxlength' => true]) ?>
 
@@ -48,13 +48,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'bodyType')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'height')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'height')->dropDownList(Core::getHeightList(), ['prompt' => ''])->label('Height (ft.)')?>
 
     <?= $form->field($model, 'age')->textInput() ?>
 
-    <?= $form->field($model, 'physicalStatus')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'isActive')->textInput() ?>
+    <?= $form->field($model, 'physicalStatus')->dropDownList(['normal'=>'Normal', 'strong'=>'Strong'], ['prompt' => '']);?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

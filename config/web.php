@@ -61,6 +61,7 @@ $config = [
         'showScriptName' => false,
         'rules' => [
                 'admin/logout'=> 'admin/default/logout',
+                'admin/dashboard'=> 'admin/default/dashboard',
             ],
         ]
     ],

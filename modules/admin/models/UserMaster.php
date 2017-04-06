@@ -3,6 +3,7 @@
 namespace app\modules\admin\models;
 
 use Yii;
+use app\lib\Core;
 
 /**
  * This is the model class for table "user_master".
@@ -47,11 +48,12 @@ class UserMaster extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['profileID', 'firstName', 'lastName', 'gender', 'dob', 'email', 'userPassword', 'height', 'isActive'], 'required'],
-            [['dob', 'age'], 'safe'],
+            [['firstName', 'gender', 'dob', 'email', 'userPassword'], 'required'],
+            [['dob', 'age', 'lastName', 'height', 'createDate'], 'safe'],
             [['address', 'personalInfo', 'aboutFamily', 'partnerPreference'], 'string'],
             [['height'], 'number'],
             [['isActive'], 'integer'],
+            [['isActive', 'height'], 'default', 'value'=>0],
             [['profileID', 'gender', 'profileCreatedFor'], 'string', 'max' => 20],
             [['firstName', 'lastName', 'city'], 'string', 'max' => 100],
             [['email'], 'string', 'max' => 155],
@@ -72,12 +74,12 @@ class UserMaster extends \yii\db\ActiveRecord
         return [
             'userID' => 'User ID',
             'profileID' => 'Profile ID',
-            'firstName' => 'First Name',
+            'firstName' => 'Name',
             'lastName' => 'Last Name',
             'gender' => 'Gender',
             'dob' => 'Dob',
             'email' => 'Email',
-            'userPassword' => 'User Password',
+            'userPassword' => 'Password',
             'phoneNo' => 'Phone No',
             'address' => 'Address',
             'country' => 'Country',
@@ -94,5 +96,16 @@ class UserMaster extends \yii\db\ActiveRecord
             'physicalStatus' => 'Physical Status',
             'isActive' => 'Is Active',
         ];
+    }
+
+    public function beforeSave(){
+        if($this->isNewRecord){
+            $this->isActive = 1;
+            $this->createDate = date('Y-m-d');
+        }
+        if(!$this->profileID){
+            $this->profileID = Core::generateProfileID();
+        }
+        return true;
     }
 }

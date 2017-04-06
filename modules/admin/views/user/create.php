@@ -9,11 +9,10 @@ use yii\helpers\Html;
 $this->title = 'Create User Master';
 $this->params['breadcrumbs'][] = ['label' => 'User Masters', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+$this->params['backUrl'] = Yii::$app->urlManager->createUrl(['admin/user']);
 ?>
 <div class="user-master-create">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
+    
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>

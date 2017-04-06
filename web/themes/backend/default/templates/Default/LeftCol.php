@@ -7,7 +7,7 @@ if(Core::getLoggedAdmin()->adminID)
 
 	if(Core::getLoggedAdmin()->superFlag) 
 	{
-		echo Cms::getLeftMenuHtml('rp_admin');
+		echo Cms::getLeftMenuHtml('super_admin');
 	}
 	elseif(Core::getLoggedAdmin()->groupCode == 'blog_admin') 
 	{		
