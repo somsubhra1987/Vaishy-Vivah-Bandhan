@@ -25,8 +25,8 @@ use app\lib\Core;
             if(Core::getLoggedUserID())
             {
             ?>           
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" style="border-right:none;"> My Home   <span class="fa fa-angle-down"></span></a>
+            <li class="dropdown" onmouseover="showHideMenu(this);" onmouseout="showHideMenu(this);">
+                <a href="#" id="myHomeDropdown" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" style="border-right:none;" onmouseover=""> My Home   <span class="fa fa-angle-down"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="<?=Yii::$app->homeUrl?>member">My Profile</a></li>    
                     <li><a href="#">Who View My Profile</a></li>  
@@ -71,3 +71,16 @@ use app\lib\Core;
     </nav>
   </section>
   <!-- END header -->
+<script type="text/javascript">
+function showHideMenu(obj)
+{
+	if(!$(obj).hasClass('open'))
+	{
+		$(obj).addClass('open');
+	}
+	else
+	{
+	 	$(obj).removeClass('open');
+	}
+}
+</script>
