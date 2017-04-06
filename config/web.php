@@ -20,7 +20,7 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'Vaishy-Vivah-Bandhan',
-            'baseUrl' => '/devzone/Vaishy-Vivah-Bandhan',
+            'baseUrl' => '/Vaishy-Vivah-Bandhan',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -54,7 +54,7 @@ $config = [
         ],
         'db' => require(__DIR__ . '/db.php'),
         'urlManager' => [
-        'baseUrl' => '/devzone/Vaishy-Vivah-Bandhan',
+        'baseUrl' => '/Vaishy-Vivah-Bandhan',
         'enablePrettyUrl' => true,
         'showScriptName' => false,
         'rules' => [
