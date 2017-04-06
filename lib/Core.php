@@ -4,7 +4,7 @@ namespace app\lib;
 
 use Yii;
 use yii\db\Command;
-
+use yii\helpers\FileHelper;
 class Core
 {
 	function printR($var, $exit=true)
@@ -139,6 +139,25 @@ return $error;
 		return $data;
 	}
 
+	function getRow($sql, $placeholders=false)
+	{
+		$db = Yii::$app->db;
+		$cmd = $db->createCommand($sql);
+		
+		if(is_array($placeholders))
+		{
+			foreach($placeholders as $name=>$value)
+			{
+				$name = trim($name);
+				if(substr($name, 0, 1) != ":") $name = ":" . $name;
+			
+				$cmd->bindValue($name, $value);	
+			}
+		}
+				
+		$row = $cmd->queryOne();		
+		return $row;
+	}
 	function getRows($sql, $placeholders=false)
 	{
 		$db = Yii::$app->db;
@@ -257,7 +276,166 @@ return $error;
 			return 'Male';
 		}
 	}
-}
+
+	function getLoggedAdmin()
+    {
+	    $admin = new \StdClass();
+	    $admin->adminID = Yii::$app->session['loggedAdminID'];
+	    
+	    $sql = "SELECT
+	    			AG.adminGroupCode,
+	    			AG.super,
+	    			AG.adminGroupID,
+	    			AG.adminGroupCode,
+	    			A.username,
+	    			CONCAT(A.firstName, ' ', A.lastName) AS adminName
+	    		FROM app_admin A
+	    			INNER JOIN app_admin_group AG USING(adminGroupID)
+	    		WHERE A.adminID = :adminID ";
+	    $row = self::getRow($sql, array('adminID'=>$admin->adminID));
+	    
+	    $admin->groupCode = $row['adminGroupCode'];
+	    $admin->superFlag =$row['super'];
+	    $admin->username =$row['username'];
+	    $admin->groupID =$row['adminGroupID'];
+	    $admin->name =$row['adminName'];
+	    $admin->groupCode =$row['adminGroupCode'];
+	    
+	    return $admin;
+    }
+
+    function getModuleName($moduleCode)
+	{		
+			$sql = "SELECT moduleName FROM app_module WHERE moduleCode = '$moduleCode'";
+			return self::getData($sql);
+	}
+	
+	function getControllerName($controllerID)
+	{	
+			$sql = "SELECT controllerName FROM app_controller WHERE controllerID = '$controllerID'";			
+			return self::getData($sql);
+	}
+
+	public function getAllModules()
+	{
+		$modules = Yii::$app->getModules();
+		unset($modules['gii']);
+		unset($modules['debug']);
+		
+		$moduleArr = array_keys($modules);
+		
+		foreach($moduleArr as $module)
+		{
+			$submodules = Yii::$app->getModule($module)->getModules();
+            $submoduleArr = array_keys($submodules);
+            
+ 			foreach($submoduleArr as $submodule)
+ 			{
+ 				$moduleArr[] = $module ."/". $submodule;
+       		}
+		}
+		
+		asort($moduleArr);
+		$moduleArr[] = "root";
+		
+		return $moduleArr;
+	}
+		
+	function getModuleAssoc()
+	{
+		$sql = "SELECT moduleCode, moduleName
+				FROM app_module
+				ORDER BY moduleName";
+				
+		return self::getDropdownAssoc($sql);
+	}
+	function getDropdownAssoc($sql)
+	{
+		$arr = array();
+		
+		$db = Yii::$app->db;
+		
+		$cmd = $db->createCommand($sql);
+		$rows = $cmd->queryAll();
+		
+		foreach($rows as $row)
+		{
+			$rowArr = array();
+			foreach($row as $val)
+			{
+				$rowArr[] = $val;
+			}
+			
+			$arr[$rowArr[0]] = $rowArr[1];
+		}
+
+		return $arr;
+	}
+	function getModuleControllerAssoc($moduleCode)
+	{
+		$allControllerNameArr = self::getModuleControllers($moduleCode);
+		
+		$arr = array();
+		foreach($allControllerNameArr AS $value)
+		{
+			$arr[$value] = $value;
+		}
+		
+		return $arr;
+	}
+	
+	// added by Nibedita // getModuleControllers
+	public function getModuleControllers($moduleCode)
+	{
+		$allModuleNameArr = self::getAllModules();
+		//App::printR($allModuleNameArr);
+		
+		$appModulePath = self::getModulesPath(); 
+		 
+		$appControllerPathArr = array();
+		foreach($allModuleNameArr as $value)
+		{
+			if($moduleCode == $value && $value == 'root')
+			{
+				$appControllerPath = self::getRootPath() . DIRECTORY_SEPARATOR .'..'. DIRECTORY_SEPARATOR .'controllers';
+				$appControllerPathArr[] = $appControllerPath;
+			}
+			elseif($moduleCode == $value)
+			{
+				$appControllerPathArr[] = $appModulePath.DIRECTORY_SEPARATOR.$value.DIRECTORY_SEPARATOR."controllers";
+			}
+		}
+		
+		$controllersArr = array();
+		foreach($appControllerPathArr as $appControllerPath)
+		{
+            if(is_dir($appControllerPath))
+            {
+                $fileLists = FileHelper::findFiles($appControllerPath);            
+	            foreach($fileLists as $controllerPath)
+	            { 
+	                $controllersArr[] = substr($controllerPath,  strrpos($controllerPath, DIRECTORY_SEPARATOR)+1,-4); 
+	            	 
+	            }
+        	}
+        }
+		
+        return $controllersArr;
+           
+    }
 	
 
+    public function getRootPath()
+	{
+		$rootPath = Yii::$app->basePath;
+		return $rootPath;
+	}
+
+	public function getModulesPath()
+	{
+		$path = self::getRootPath() . "/modules";
+		return $path;
+	}
+	
+}
 ?>

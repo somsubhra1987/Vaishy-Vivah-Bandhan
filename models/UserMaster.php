@@ -69,6 +69,7 @@ class UserMaster extends \yii\db\ActiveRecord
         if($this->isNewRecord){
             $this->profileID = Core::generateProfileID();
             $this->userPassword = rand(10000, 99999);
+            $this->createDate = date('Y-m-d'); 
         }
         return true;
     }

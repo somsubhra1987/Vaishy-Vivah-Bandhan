@@ -12,9 +12,8 @@ $config = [
             'bundles' => [
 
                 'yii\bootstrap\BootstrapAsset' => [
-                    'css' => []
+                    'css' => [(stristr($_SERVER['REQUEST_URI'], "/admin"))?'css/bootstrap.css':'style.css']
                 ]
-                
             ]
         ],
         'request' => [
@@ -30,9 +29,12 @@ $config = [
             'driver' => 'GD',  //GD or Imagick
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => stristr($_SERVER['REQUEST_URI'], "/admin") ? 'app\modules\admin\models\Admin' : 'app\models\User',
             'enableAutoLogin' => true,
-        ],
+        ],        
+        'session' => [
+		    'name' => stristr($_SERVER['REQUEST_URI'], "/admin") ? 'VVBADM_SESSID' : 'PHPSESSID',
+		],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -58,12 +60,13 @@ $config = [
         'enablePrettyUrl' => true,
         'showScriptName' => false,
         'rules' => [
-
+                'admin/logout'=> 'admin/default/logout',
+                'admin/dashboard'=> 'admin/default/dashboard',
             ],
         ]
     ],
     'params' => $params,
-    'layout' => '@app/web/themes/frontend/vivahBandhan/templates/Default/Page',
+    'layout' => (stristr($_SERVER['REQUEST_URI'], "/admin")) ? '@app/web/themes/backend/default/templates/Default/Page':'@app/web/themes/frontend/vivahBandhan/templates/Default/Page',
     'modules' => [
 
         'member' => [
@@ -71,7 +74,11 @@ $config = [
             'class' => 'app\modules\member\Module',
 
         ],
+        'admin' => [
 
+            'class' => 'app\modules\admin\Module',
+
+        ],
     ],
 
 ];
