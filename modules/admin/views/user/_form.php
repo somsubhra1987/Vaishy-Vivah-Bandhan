@@ -50,8 +50,6 @@ use yii\jui\DatePicker;
 
     <?= $form->field($model, 'height')->dropDownList(Core::getHeightList(), ['prompt' => ''])->label('Height (ft.)')?>
 
-    <?= $form->field($model, 'age')->textInput() ?>
-
     <?= $form->field($model, 'physicalStatus')->dropDownList(['normal'=>'Normal', 'strong'=>'Strong'], ['prompt' => '']);?>
 
     <div class="form-group">

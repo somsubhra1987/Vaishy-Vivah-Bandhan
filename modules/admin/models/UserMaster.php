@@ -53,7 +53,7 @@ class UserMaster extends \yii\db\ActiveRecord
             [['address', 'personalInfo', 'aboutFamily', 'partnerPreference'], 'string'],
             [['height'], 'number'],
             [['isActive'], 'integer'],
-            [['isActive', 'height'], 'default', 'value'=>0],
+            [['isActive', 'height', 'age'], 'default', 'value'=>0],
             [['profileID', 'gender', 'profileCreatedFor'], 'string', 'max' => 20],
             [['firstName', 'lastName', 'city'], 'string', 'max' => 100],
             [['email'], 'string', 'max' => 155],
