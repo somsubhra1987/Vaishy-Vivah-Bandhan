@@ -25,7 +25,7 @@ use app\lib\Core;
             if(Core::getLoggedUserID())
             {
             ?>           
-            <li class="dropdown" onmouseover="showHideMenu(this);" onmouseout="showHideMenu(this);">
+            <li class="dropdown" onmouseover="showHideMenu(this, 1);" onmouseout="showHideMenu(this, 0);">
                 <a href="#" id="myHomeDropdown" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" style="border-right:none;" onmouseover=""> My Home   <span class="fa fa-angle-down"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="<?=Yii::$app->homeUrl?>member">My Profile</a></li>    
@@ -52,7 +52,7 @@ use app\lib\Core;
             if(Core::getLoggedUserID())
             {
             ?>
-            <li class="dropdown">
+            <li class="dropdown" onmouseover="showHideMenu(this, 1);" onmouseout="showHideMenu(this, 0);">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="border-right:none;"> My Account   <span class="fa fa-angle-down"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="<?=Yii::$app->homeUrl?>member"><?php echo Core::getLoggedUser()->name;?></a></li>
@@ -72,13 +72,13 @@ use app\lib\Core;
   </section>
   <!-- END header -->
 <script type="text/javascript">
-function showHideMenu(obj)
+function showHideMenu(obj, flg)
 {
 	if(!$(obj).hasClass('open'))
 	{
 		$(obj).addClass('open');
 	}
-	else
+	if(flg == 0)
 	{
 	 	$(obj).removeClass('open');
 	}

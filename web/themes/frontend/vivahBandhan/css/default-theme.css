@@ -31,7 +31,7 @@
 }
 
 .main-nav .dropdown:hover .dropdown-toggle{ 
-  color: #f4be1d; 
+  /*color: #f4be1d; */
 }
 
 .main-nav .dropdown:hover .dropdown-toggle::before{
@@ -50,7 +50,7 @@
 
 .navbar-nav > li > .dropdown-menu > li > a:hover,
 .navbar-nav > li > .dropdown-menu > li > a:focus{ 
-  color: #f4be1d;
+  /*color: #f4be1d;*/
 }
 
 .main-slider .slick-prev:hover,
