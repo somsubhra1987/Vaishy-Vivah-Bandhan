@@ -20,7 +20,7 @@ AppAsset::register($this);
 
   <?php $this->head() ?>    
   <?php echo $this->registerCssFile(Yii::$app->request->baseUrl.'/themes/frontend/vivahBandhan/css/style.css', ['depends' => [yii\bootstrap\BootstrapAsset::className()]]);?>
-  <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
+  <?php echo $this->registerCssFile(Yii::$app->request->baseUrl.'/themes/frontend/vivahBandhan/css/flexslider.css');?>
   <link rel="shortcut icon" href="<?php echo Yii::$app->request->baseUrl; ?>/favicon.ico" type="image/x-icon" />  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
