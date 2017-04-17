@@ -5,7 +5,7 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\modules\admin\models\AppAdmin;
 use app\modules\admin\models\AppAdminSearch;
-use app\modules\admin\controllers\ControllerAdmin;
+use app\modules\admin\ControllerAdmin;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\lib\core\App;

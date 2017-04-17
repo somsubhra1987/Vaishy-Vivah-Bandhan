@@ -1,5 +1,5 @@
 <?php
-use app\lib\core\App;
+use app\lib\Core;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
     <?php
         echo $form->errorSummary($model);
     ?>
-    <?= $form->field($model, 'adminGroupID')->dropDownList(App::getAdminGroupAssoc(),['prompt'=>'==SELECT=='])->label('Admin Group') ?>
+    <?= $form->field($model, 'adminGroupID')->dropDownList(Core::getAdminGroupAssoc(),['prompt'=>'==SELECT=='])->label('Admin Group') ?>
     
 	<?php 
 	if($model->isNewRecord) 
@@ -35,7 +35,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'countryCode')->dropDownList(App::getCountryAssoc(),['prompt'=>'==SELECT=='])->label('Country') ?>
+    <?= $form->field($model, 'countryCode')->dropDownList(Core::getCountryAssoc(),['prompt'=>'==SELECT=='])->label('Country') ?>
 
     <?= $form->field($model, 'state')->textInput(['maxlength' => true]) ?>
 

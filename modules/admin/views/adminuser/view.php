@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use app\lib\core\App;
+use app\lib\Core;
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\AppAdmin */
 
@@ -27,7 +27,7 @@ $this->params['backUrl'] =  Yii::$app->urlManager->createUrl("admin/adminuser");
             'address',            
             [
             	'attribute'=>'countryCode',
-            	'value'=> App::getCountryName($model->countryCode),
+            	'value'=> Core::getCountryName($model->countryCode),
            	],
             'state',
             'city',

@@ -437,5 +437,23 @@ return $error;
 		return $path;
 	}
 	
+	public function getCountryAssoc()
+	{
+		$sql = "SELECT countryCode, countryName FROM app_country ORDER BY countryName";
+		$countryList = self::getDropdownAssoc($sql);
+		return $countryList;
+	}
+	public function getCountryName($countryCode)
+	{
+		$sql = "SELECT countryName FROM app_country WHERE countryCode = :countryCode";
+		return self::getData($sql, array(':countryCode'=>$countryCode));
+	}
+	function getAdminGroupAssoc()
+	{	
+		$sql = "SELECT adminGroupID,title 
+				FROM app_admin_group
+				ORDER BY title";
+		return self::getDropdownAssoc($sql);
+	}
 }
 ?>
