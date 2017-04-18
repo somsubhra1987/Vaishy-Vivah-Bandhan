@@ -34,4 +34,5 @@ return array(
     'Codeception\\Extension\\' => array($vendorDir . '/codeception/base/ext'),
     'Codeception\\' => array($vendorDir . '/codeception/base/src/Codeception'),
     'yii\\jui\\' => array($vendorDir . '/yiisoft/yii2-jui'),
+    'mihaildev\\ckeditor\\' => array($vendorDir . '/mihaildev/ckeditor'),
 );

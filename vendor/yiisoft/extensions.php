@@ -57,4 +57,31 @@ return array (
       '@yii/jui' => $vendorDir . '/yiisoft/yii2-jui',
     ),
   ), 
+  'mihaildev/ckeditor' => 
+  array (
+    'name' => 'mihaildev/ckeditor',
+    'version' => '2',
+    'alias' => 
+    array (
+      '@mihaildev/ckeditor' => $vendorDir . '/mihaildev/ckeditor',
+    ),
+  ),
+    'iutbay/yii2kcfinder' => 
+  array (
+    'name' => 'iutbay/yii2kcfinder',
+    'version' => '2',
+    'alias' => 
+    array (
+      '@iutbay/yii2kcfinder' => $vendorDir . '/iutbay/yii2kcfinder',
+    ),
+  ),
+  'dosamigos/ckeditor' => 
+  array (
+    'name' => 'dosamigos/ckeditor',
+    'version' => '2',
+    'alias' => 
+    array (
+      '@dosamigos/ckeditor' => $vendorDir . '/dosamigos/ckeditor',
+    ),
+  ),
 );

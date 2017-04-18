@@ -455,5 +455,18 @@ return $error;
 				ORDER BY title";
 		return self::getDropdownAssoc($sql);
 	}
+	function getPageTypeAssoc()
+	{
+		$sql = "SELECT pageTypeID, title
+				FROM cms_page_type
+				ORDER BY title";
+				
+		return self::getDropdownAssoc($sql);
+	}
+	public function getKcfinderBaseUrl()
+	{
+	  $filePath = self::getRootUrl() . "/web/kcfinder";
+	  return $filePath;
+	}
 }
 ?>
