@@ -62,6 +62,10 @@ $config = [
         'rules' => [
                 'admin/logout'=> 'admin/default/logout',
                 'admin/dashboard'=> 'admin/default/dashboard',
+				'contact' => 'site/contact',
+				'about' => 'site/about',
+				'testimonial' => 'site/testimonial',
+				'service' => 'site/service',
             ],
         ]
     ],

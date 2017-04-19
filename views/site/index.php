@@ -86,25 +86,12 @@ Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur. Cl
              <div class="news-right">
               <h3>Sakshi Gupta And Kailash relan <span class="orange">12th April 2012</span> in Delhi.</h3>
               <div class="clear"></div>
-              <p>While I was in Mumbai and Pavini was in Delhi, we exchanged ..<br />
+              <p>While I was in Mumbai and Pavini was in Delhi, we exchanged ....<br />
                  <a href="service.html" class="view-all"><strong>[View More]</strong></a></p>
              </div>
             </div>
             <p></p>
           </div>
-        </div>
-      </div>
-      
-      
-      
-      <div class="making-area">
-        <div class=" container">
-          <ul>
-            <li><a href="#">matrimonial services</a></li>
-            <li><a href="#">MATCH MAKING SERVICES</a></li>
-            <li><a href="#">Matrimonial Profile</a></li>
-            <li style="background:none; margin-right:0px;"><a href="#" style="padding:0px;">Marriage Bureau </a></li>
-          </ul>
         </div>
       </div>
      </div>

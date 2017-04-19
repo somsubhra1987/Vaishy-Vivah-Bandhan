@@ -162,4 +162,24 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+	
+	/**
+     * Displays testimonal page.
+     *
+     * @return string
+     */
+    public function actionTestimonial()
+    {
+        return $this->render('testimonial');
+    }
+	
+	/**
+     * Displays service page.
+     *
+     * @return string
+     */
+    public function actionService()
+    {
+        return $this->render('service');
+    }
 }
