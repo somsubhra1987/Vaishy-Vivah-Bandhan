@@ -28,14 +28,10 @@ use yii\helpers\Html;
             </div>
             <div class="navigation">
                 <ul>
-                    <li><a href="<?php echo Yii::$app->homeUrl;?>" class="active">home</a>
-                    </li>
-                    <li><a href="about-us.html">About Us</a>
-                    </li>
-                    <li><a href="service.html">Services</a>
-                    </li>
-                    <li><a href="testiomonials.html">Testiomonials</a>
-                    </li>
+                    <li><a href="<?php echo Yii::$app->homeUrl;?>" class="active">home</a></li>
+                    <li><?php echo Html::a('About Us',['site/about']);?></li>
+                    <li><?php echo Html::a('Services',['site/service']);?></li>
+                    <li><?php echo Html::a('Testiomonials',['site/testimonial']);?></li>
                     <li><?php echo Html::a('Contact',['site/contact']);?></li>
                     <li style="background:none;"><?php echo Html::a('login',['site/login']);?></li>
                 </ul>
