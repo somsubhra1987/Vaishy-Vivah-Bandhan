@@ -94,19 +94,6 @@ Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur. Cl
           </div>
         </div>
       </div>
-      
-      
-      
-      <div class="making-area">
-        <div class=" container">
-          <ul>
-            <li><a href="#">matrimonial services</a></li>
-            <li><a href="#">MATCH MAKING SERVICES</a></li>
-            <li><a href="#">Matrimonial Profile</a></li>
-            <li style="background:none; margin-right:0px;"><a href="#" style="padding:0px;">Marriage Bureau </a></li>
-          </ul>
-        </div>
-      </div>
      </div>
 
 <?php $this->registerJsFile(Yii::$app->request->baseUrl.'/themes/frontend/vivahBandhan/js/jquery.flexslider-min.js', ['depends' => [yii\web\JqueryAsset::className()]]);?>
