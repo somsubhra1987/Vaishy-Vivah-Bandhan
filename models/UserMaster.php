@@ -105,7 +105,7 @@ class UserMaster extends \yii\db\ActiveRecord
                 $fileSaveData = $path.'/upload_images/thumb/thumb_' . $fileName;
                 self::removeFile($fileSaveData);
 
-                $sql = "DELETE FROM user_uploaded_images WHERE refID = :refID AND                 refTable = :refTable";
+                $sql = "DELETE FROM user_uploaded_images WHERE refID = :refID AND refTable = :refTable";
                 $cmd = $db->createCommand($sql);
                 $cmd->bindValue(':refID', $this->userID);
                 $cmd->bindValue(':refTable', 'user_master');
