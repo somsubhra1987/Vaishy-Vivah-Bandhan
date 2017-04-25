@@ -468,5 +468,36 @@ return $error;
 	  $filePath = self::getRootUrl() . "/web/kcfinder";
 	  return $filePath;
 	}
+
+	public function getRegionAssoc()
+	{
+		$sql = "SELECT regionID, title
+				FROM cms_region				
+				ORDER BY listingOrder, title";
+				
+		return self::getDropdownAssoc($sql);
+	}
+
+	function getBannerTypeAssoc()
+	{
+		$sql = "SELECT bannerTypeCode, title
+				FROM cms_banner_type
+				ORDER BY title";
+				
+		return self::getDropdownAssoc($sql);
+	}
+	function getBannerRegionTitle($regionBannerID)
+	{
+		$db = Yii::$app->db;
+		$sql = "SELECT title
+				FROM  cms_region_banner
+				WHERE regionBannerID = '$regionBannerID'";
+				
+		$cmd=$db->createCommand($sql);
+		$row = $cmd->queryScalar();
+		
+				
+		return $row;
+	}
 }
 ?>

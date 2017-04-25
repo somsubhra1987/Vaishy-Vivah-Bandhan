@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use app\lib\core\App;
+use app\lib\Core;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\cms\models\CmsBanner */
@@ -15,12 +15,12 @@ use app\lib\core\App;
 	
     <?= $form->field($model, 'regionBannerID')->hiddenInput(['maxlength' => true]) ?>
     <div class="form-group">
-    <?=App::getBannerRegionTitle($model->regionBannerID); ?>
+    <?=Core::getBannerRegionTitle($model->regionBannerID); ?>
     </div>
     <?php  
 	if($model->isNewRecord)
 	{ 
-		echo $form->field($model, 'bannerTypeCode')->dropDownList(App::getBannerTypeAssoc(),['prompt'=> '==SELECT=='],['options' => [$bannerTypeCode => ['selected' => true]] ])->label('Banner Type');	
+		echo $form->field($model, 'bannerTypeCode')->dropDownList(Core::getBannerTypeAssoc(),['prompt'=> '==SELECT=='])->label('Banner Type');	
 	} 
 	else 
 	{ 

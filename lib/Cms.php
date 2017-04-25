@@ -590,5 +590,18 @@ EOF;
 		$content = Core::getData($sql, array(':blockCode'=>$blockCode));
 		return $content;
 	}
+
+	public function getBannerByRegionCode($regionCode)
+	{
+		$sql = "SELECT 
+					cb.image,
+					cb.title 
+				FROM cms_banner cb 
+				INNER JOIN cms_region_banner rb ON cb.regionBannerID = rb.regionBannerID
+				INNER JOIN cms_region_object ro ON rb.regionBannerID = ro.refID
+				INNER JOIN cms_region cr ON ro.regionID = cr.regionID AND cr.regionCode = :regionCode ";
+		$imageList = Core::getRows($sql, array(':regionCode'=>$regionCode));
+		return $imageList;
+	}
 	
 }

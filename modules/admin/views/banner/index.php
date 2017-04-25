@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = 'Banner Management';
     <?php echo CustomHtml::getFlash();?>
 
 	<p>
-	  <?= Html::a('Add New', Yii::$app->urlManager->createUrl('admin/cms/regionbanner/create'), ['class' => 'btn btn-success btn-position-right']) ?>
+	  <?= Html::a('Add New', Yii::$app->urlManager->createUrl('admin/regionbanner/create'), ['class' => 'btn btn-success btn-position-right']) ?>
 	</p>
 	
 	</br></br></br>
@@ -49,9 +49,9 @@ $this->params['breadcrumbs'][] = 'Banner Management';
 							$needLink = stripslashes($row['needLink']);
 							
 							/*---------------URL CREATION---------------------*/
-							$updateRegionbannerUrl =  Yii::$app->urlManager->createUrl(['admin/cms/regionbanner/update','id'=>$regionBannerID]);
-							$redirectUrl = Yii::$app->urlManager->createUrl(['admin/cms/banner/']);
-							$deleleUrl = Yii::$app->urlManager->createUrl(['admin/cms/banner/deleteregionbanner','id'=>$regionBannerID]);
+							$updateRegionbannerUrl =  Yii::$app->urlManager->createUrl(['admin/regionbanner/update','id'=>$regionBannerID]);
+							$redirectUrl = Yii::$app->urlManager->createUrl(['admin/banner/']);
+							$deleleUrl = Yii::$app->urlManager->createUrl(['admin/banner/deleteregionbanner','id'=>$regionBannerID]);
 							/*------------------------------------------------*/
 							
 							

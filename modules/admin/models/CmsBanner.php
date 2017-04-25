@@ -6,7 +6,7 @@ use Yii;
 use yii\db\Query;
 use yii\web\UploadedFile;
 use app\lib\Core;
-use app\lib\core\GdClient;
+use app\lib\GdClient;
 /**
  * This is the model class for table "cms_banner".
  *
@@ -282,4 +282,32 @@ class CmsBanner extends \yii\db\ActiveRecord
 		
 		return $previewImg;
 	 }
+	 public function deleteRegionbannerByID($regionBannerID)
+	{
+		$db = Yii::$app->db;
+		$sql = "SELECT count(*) as totData
+					FROM cms_banner
+					WHERE 
+					regionBannerID = '$regionBannerID'";					
+		$cmd = $db->createCommand($sql);
+		$rows = $cmd->queryScalar();
+		if(!$rows)
+		{		
+			$db->createCommand()->delete('cms_region_banner', 'regionBannerID ='. $regionBannerID)->execute();
+			return true;						
+		}
+		return false;	
+	}
+	public function hasNeedLink($regionBannerID)
+	{
+		$db = Yii::$app->db;	
+			
+		$sql = "SELECT needLink
+					FROM cms_region_banner 
+					WHERE regionBannerID ='$regionBannerID'";
+		$cmd=$db->createCommand($sql);
+		$needLink = $cmd->queryScalar();
+		if($needLink) return true;
+			else return false;
+	}
 }

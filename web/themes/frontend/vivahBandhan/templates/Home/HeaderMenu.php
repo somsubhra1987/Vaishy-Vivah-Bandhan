@@ -1,19 +1,22 @@
 <?php
 use yii\helpers\Html;
+use app\lib\Cms;
 ?>
 <div class="header-outer index-heaight">
     <div class="banner-area">
         <div class="flexslider">
             <ul class="slides">
+                <?php
+                $bannerList = Cms::getBannerByRegionCode('homePageHeaderBanner');
+                foreach($bannerList as $key=>$data)
+                {
+                    ?>
                 <li>
-                    <?php echo Html::img(Yii::$app->getUrlManager()->getBaseUrl()."/themes/frontend/vivahBandhan/images/banner.jpg", ['alt' => ''])?>
+                    <?php echo Html::img(Yii::$app->getUrlManager()->getBaseUrl()."/datafiles/cms_banner/main/main_".$data['image'], ['alt' => "$data[title]"])?>
                 </li>
-                <li>
-                    <?php echo Html::img(Yii::$app->getUrlManager()->getBaseUrl()."/themes/frontend/vivahBandhan/images/slider-2.jpg", ['alt' => ''])?>
-                </li>
-                <li>
-                    <?php echo Html::img(Yii::$app->getUrlManager()->getBaseUrl()."/themes/frontend/vivahBandhan/images/banner1.jpg", ['alt' => ''])?>
-                </li>
+                    <?php
+                }
+                ?>
             </ul>
         </div>
     </div>
