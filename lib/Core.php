@@ -494,10 +494,18 @@ return $error;
 				WHERE regionBannerID = '$regionBannerID'";
 				
 		$cmd=$db->createCommand($sql);
-		$row = $cmd->queryScalar();
-		
-				
+		$row = $cmd->queryScalar();				
 		return $row;
+	}
+
+	public function getSelectedRegionID($refID, $refTable)
+	{
+		$sql = "SELECT 
+					regionID 
+				FROM cms_region_object 
+				WHERE refID = :refID AND refTable = :refTable";
+		$regionID = Core::getData($sql, array(':refID'=>$refID, ':refTable'=>$refTable));
+		return $regionID;
 	}
 }
 ?>

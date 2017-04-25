@@ -74,10 +74,8 @@ class RegionbannerController extends ControllerAdmin
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-		$model->regionID = Core::getSelectedThemeRegionID($id, 'cms_region_banner');
-		
-		$modelRegionObject = new CmsRegionObject();
-		
+		$model->regionID = Core::getSelectedRegionID($id, 'cms_region_banner');		
+			
         if ($model->load(Yii::$app->request->post()) && $model->save()) 
         {	            
 	        Yii::$app->session->setFlash('success', $model->title. ' successfully updated.');
