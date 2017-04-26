@@ -10,7 +10,7 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Cms Blocks', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-$backUrl =  Yii::$app->urlManager->createAbsoluteUrl("admin/cms/block/");
+$backUrl =  Yii::$app->urlManager->createAbsoluteUrl("admin/block");
 $backLink = "<a href=\"$backUrl\">Back</a>";
 ?>
 

@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use app\lib\Cms;
 ?>
 
 <!--mid-container-->
@@ -44,28 +45,8 @@ use yii\bootstrap\ActiveForm;
       
       <div class="service-area">
         <div class="container">
-          <div class="service">
-            <h1>Welcome to Vaishyvivah  </h1>
-            <p><span class="orange">Marriage </span>
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae .<br />
-<br />
-
- ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.<br />
-<br />
- 
-
-Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur. Click Here.. <a href="about-us.html" class="click-hare">Click Here..</a></p>
-          </div>
-          <div class="service">
-            <h1>Most Trusted &amp; Successful</h1>
-            <ul>
-              <li>100% mobile verified profiles.</li>
-              <li>Featured in the Limca Book of Records for the highest number of documented marriages online.</li>
-              <li>World'd Best Matches  And Maximam Responses.</li>
-              <li>Millions of profiles to choose from.</li>
-              <li>Join 1 Million Members with Photos.</li>
-            </ul>
-          </div>
+          <?=Cms::getBlockContent('homepage-block1')?>
+          <?=Cms::getBlockContent('homepage-block2')?>          
           <div class="service" style=" margin-right:0px;">
             <h1>Vaishyvivah   Success  Couples</h1>
             

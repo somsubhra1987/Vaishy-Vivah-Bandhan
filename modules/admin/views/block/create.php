@@ -10,7 +10,7 @@ $this->title = 'Create Block';
 $this->params['breadcrumbs'][] = ['label' => 'Block Management', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-$backUrl =  Yii::$app->urlManager->createAbsoluteUrl("admin/cms/block/");
+$backUrl =  Yii::$app->urlManager->createAbsoluteUrl("admin/block");
 $this->params['backUrl'] = $backUrl;
 ?>
 
