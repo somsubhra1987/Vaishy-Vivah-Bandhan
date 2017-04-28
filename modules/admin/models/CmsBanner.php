@@ -271,7 +271,7 @@ class CmsBanner extends \yii\db\ActiveRecord
 		$image = $cmd->queryScalar();
 		
 		$baseUrl = Yii::$app->getUrlManager()->getBaseUrl();
-		$bannerUrl = $baseUrl .'/datafiles/uploaded/cms_banner/main/';
+		$bannerUrl = $baseUrl .'/datafiles/cms_banner/main/';
 		
 		$imageUrl = $bannerUrl .'main_'.$image;
 		
