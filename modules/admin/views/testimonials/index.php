@@ -21,16 +21,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'testimonialsID',
+			CustomHtml::getEditActionIcon(),
+			
             'groomName',
             'groomShortDescription:ntext',
             'brideName',
             'brideShortDescription:ntext',
             // 'coupleImage',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            CustomHtml::getDeleteActionIcon(),
         ],
     ]); ?>
 </div>
