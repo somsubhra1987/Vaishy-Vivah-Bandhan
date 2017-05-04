@@ -39,7 +39,7 @@ class UserMaster extends \yii\db\ActiveRecord
             [['userPassword','phoneNo','address','country', 'state', 'city', 'dob', 'subject', 'gender', 'personalInfo', 'aboutFamily','partnerPreference','profileID', 'profileCreatedFor', 'bodyType', 'height','age', 'physicalStatus'],'safe'],
             [['email'], 'string', 'max' => 155],
             [['isActive'], 'default', 'value'=>'1'],
-            [['lastName'], 'default', 'value'=> ''],
+            [['lastName'], 'default', 'value'=> ''],            
             [['fileName'], 'file', 'skipOnEmpty' => true, 'checkExtensionByMimeType'=>false],
             [['email'], 'unique'],
         ];
@@ -92,7 +92,7 @@ class UserMaster extends \yii\db\ActiveRecord
             $mkpath = $path.'/upload_images';
             @mkdir($mkpath, 0777, true);   
 
-            $sql = "SELECT fileName FROM user_uploaded_images WHERE refID = :refID AND refTable = :refTable ";
+            /*$sql = "SELECT fileName FROM user_uploaded_images WHERE refID = :refID AND refTable = :refTable ";
             $fileName = Core::getData($sql, array(':refID'=>$this->userID, ':refTable'=>'user_master'));
 
             if($fileName){
@@ -110,7 +110,7 @@ class UserMaster extends \yii\db\ActiveRecord
                 $cmd->bindValue(':refID', $this->userID);
                 $cmd->bindValue(':refTable', 'user_master');
                 $cmd->execute();
-            }
+            }*/
 
             $fileName = $this->userID.'_profile_'.$this->fileName; 
             
@@ -125,12 +125,14 @@ class UserMaster extends \yii\db\ActiveRecord
             $sql = "INSERT INTO user_uploaded_images set 
                             fileName = :fileName,
                             refID = :refID,
-                            refTable = :refTable
+                            refTable = :refTable,
+                            adminVerifiedStatus = :adminVerifiedStatus
                     ";
             $cmd = $db->createCommand($sql);
             $cmd->bindValue(':fileName', $fileName);
             $cmd->bindValue(':refID', $this->userID);
             $cmd->bindValue(':refTable', 'user_master');
+            $cmd->bindValue(':adminVerifiedStatus','0');
             $cmd->execute();
 
             /*Create thumb image*/

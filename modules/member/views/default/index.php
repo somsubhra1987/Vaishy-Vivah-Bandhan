@@ -17,7 +17,7 @@ use app\lib\Core;
                         <div class="col-lg-3 no-padding">
                             <?php
                             $userDetail = Core::getLoggedUser();
-                            $profilePath = Core::getFilePath($userDetail->userID, 'user_master');
+                            $profilePath = Core::getProfileImagePath($userDetail->userID, 'user_master');
                             if(!$profilePath){
                                 $profilePath = Yii::$app->getUrlManager()->getBaseUrl().'/themes/frontend/vivahBandhan/images/user.png';
                             }

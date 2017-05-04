@@ -196,7 +196,6 @@ return $error;
 	  	return $uploadedPath;
 	  	}
 	}
-
 	public function generateProfileID(){
 		$profileID = substr(str_shuffle(str_repeat('ABCDEFGHIJKLMNPQRSTUVWXYZ',2)),0,1);
 		$profileID .= substr(str_shuffle(str_repeat('0123456789',8)),0,7);
@@ -511,6 +510,27 @@ return $error;
 	public function getActiveClass($actionName)
 	{
 		return (Yii::$app->controller->action->id == $actionName) ? 'active' : '';
+    }
+
+
+	public function getProfileImagePath($refID, $refTable, $filethumb = true){
+		$uploadedPath = self::getUploadedUrl();
+	  	$uploadedPath .=  "/".$refTable."/";
+	  	if($filethumb){
+	  	$uploadedPath .= "thumb/thumb_";
+	  	}
+	  	$sql = "SELECT 
+	  				fileName 
+	  			FROM user_uploaded_images WHERE refID = :refID 
+	  			AND refTable = :refTable 
+	  			AND showInDp = '1'
+	  			AND adminVerifiedStatus = '1'
+	  			";
+	  	$fileName = self::getData($sql, array(':refID'=>$refID, ':refTable'=>$refTable));
+	  	if($fileName){
+	  	$uploadedPath .= $fileName;	
+	  	return $uploadedPath;
+	  	}
 	}
 }
 ?>
