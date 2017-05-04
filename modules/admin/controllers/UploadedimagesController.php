@@ -14,6 +14,7 @@ use yii\filters\VerbFilter;
  */
 class UploadedimagesController extends ControllerAdmin
 {
+    public $enableCsrfValidation = false;
     /**
      * Lists all UserUploadedImages models.
      * @return mixed
@@ -106,5 +107,22 @@ class UploadedimagesController extends ControllerAdmin
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionApproved(){
+        $response = array();
+        $imageID = $_REQUEST['imageID'];
+        $checkedStatus = $_REQUEST['checkedStatus'];
+        $model = $this->findModel($imageID);
+        if(!empty($model)){
+            $model->adminVerifiedStatus = $checkedStatus;
+            $model->save();
+            $response['status']='success';
+            $response['message']='Updated successfully';
+            exit(json_encode($response));
+        }
+        $response['status']='error';
+        $response['message']='Not updated';
+        exit(json_encode($response));
     }
 }

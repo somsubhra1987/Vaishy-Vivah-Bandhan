@@ -39,13 +39,44 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'showInDp',
             [
                 'attribute'=> 'adminVerifiedStatus',
-                'value'=> function($data){
-                    return ($data->adminVerifiedStatus >0)? 'Verified':'Not Verified';
+                'value'=> function ($data){ 
+                                                                                                                                    
+                    return ($data->adminVerifiedStatus)? "<input type='checkbox' name='adminVerifiedStatus' class='imageVerified-checkbox' checked='checked' value=$data->ID>" : "<input type='checkbox' name='adminVerifiedStatus' class='imageVerified-checkbox' value=$data->ID>";
                 },
                 'filter'=>['1'=>'Verified', '0'=>'Not Verified'],
                 'format' => 'raw',
             ],
-            ['class' => 'yii\grid\ActionColumn'],
+            //['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 </div>
+<input type="hidden" id="uploadImageUrl" value="<?php echo Yii::$app->urlManager->createUrl('admin/uploadedimages/approved')?>"/>
+<?php
+$this->registerJs("
+$('input[type=checkbox][name=adminVerifiedStatus]').change(function(e) {
+    var url = $('#uploadImageUrl').val();
+    var checkedStatus = 0;
+    if($(this).prop('checked') == true){
+        checkedStatus = 1;
+    }
+    var imageID= this.value;
+    if(imageID){
+        $.ajax({
+            type:'post',
+            data: {imageID:imageID, checkedStatus:checkedStatus},
+            url:url,
+            dataType:'json',
+            success:function(response){
+                if(response.status == 'success'){
+                    alert(response.message);
+                }
+            },
+            error:function() 
+            {
+                console.log('invalid request');
+            }
+        });
+    }
+});
+");
+?>
