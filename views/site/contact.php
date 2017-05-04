@@ -32,8 +32,8 @@ $this->title = 'Contact Us';
           <p>Email
             <input type="text" class="foam" placeholder="Enter your Email" />
           </p>
-          <p>Quary
-            <textarea class="quary" placeholder="Quary"></textarea>
+          <p>Query
+            <textarea class="quary" placeholder="Query"></textarea>
           </p>
           <p>
             <input type="button" class="submit" value="submit" />

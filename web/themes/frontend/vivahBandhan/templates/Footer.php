@@ -16,11 +16,11 @@ use yii\helpers\Html;
   <div class="container">
     <div class="footer-nav">
       <ul>
-        <li><a href="index.html" style="padding-left:0px;">Home</a></li>
-        <li><a href="about-us.html">About Us</a></li>
-        <li><a href="service.html">Services</a></li>
-        <li><a href="testiomonials.html">Testiomonials</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="<?php echo Yii::$app->homeUrl;?>" style="padding-left:0px;">Home</a></li>
+        <li><?php echo Html::a('About Us',['site/about']);?></li>
+        <li><?php echo Html::a('Services',['site/service']);?></li>
+        <li><?php echo Html::a('Testiomonials',['site/testimonial']);?></li>
+        <li><?php echo Html::a('Contact',['site/contact']);?></li>
       </ul>
       <p>&copy; 2017 All rights reserved by <span class="yellow"> Vaishy Vivah Bandhan </span></p>
     </div>

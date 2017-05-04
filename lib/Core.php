@@ -507,5 +507,10 @@ return $error;
 		$regionID = Core::getData($sql, array(':refID'=>$refID, ':refTable'=>$refTable));
 		return $regionID;
 	}
+	
+	public function getActiveClass($actionName)
+	{
+		return (Yii::$app->controller->action->id == $actionName) ? 'active' : '';
+	}
 }
 ?>
