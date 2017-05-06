@@ -22,62 +22,130 @@ class SettingsController extends ControllerAdmin
     public function actionIndex()
     {
 		$model = new Settings();
-		$settingDetailArr = Settings::find()->all();//print_r($settingDetailArr);
-		foreach($settingDetailArr as $settingDetail)
-		{
-			if($settingDetail->type == 'contact_person')
+		if ($model->load(Yii::$app->request->post())) {
+		
+			$model->truncateTable();
+			
+			$settingsModel = new Settings();
+			$settingsModel->type = 'contact_person';
+			$settingsModel->value = $model->contactPerson;
+			$settingsModel->save();
+			
+			$settingsModel = new Settings();
+			$settingsModel->type = 'designation';
+			$settingsModel->value = $model->designation;
+			$settingsModel->save();
+			
+			$settingsModel = new Settings();
+			$settingsModel->type = 'address';
+			$settingsModel->value = $model->address;
+			$settingsModel->save();
+			
+			$settingsModel = new Settings();
+			$settingsModel->type = 'contact_no';
+			$settingsModel->value = $model->contactNo;
+			$settingsModel->save();
+			
+			$settingsModel = new Settings();
+			$settingsModel->type = 'whatsapp_no';
+			$settingsModel->value = $model->whatsappNo;
+			$settingsModel->save();
+			
+			$settingsModel = new Settings();
+			$settingsModel->type = 'email_id';
+			$settingsModel->value = $model->emailID;
+			$settingsModel->save();
+			
+			$settingsModel = new Settings();
+			$settingsModel->type = 'facebook_link';
+			$settingsModel->value = $model->facebookLink;
+			$settingsModel->save();
+			
+			$settingsModel = new Settings();
+			$settingsModel->type = 'twitter_link';
+			$settingsModel->value = $model->twitterLink;
+			$settingsModel->save();
+			
+			$settingsModel = new Settings();
+			$settingsModel->type = 'gplus_link';
+			$settingsModel->value = $model->gplusLink;
+			$settingsModel->save();
+			
+			$settingsModel = new Settings();
+			$settingsModel->type = 'youtube_link';
+			$settingsModel->value = $model->youtubeLink;
+			$settingsModel->save();
+			
+			$settingsModel = new Settings();
+			$settingsModel->type = 'rss_link';
+			$settingsModel->value = $model->rssLink;
+			$settingsModel->save();
+			
+			$settingsModel = new Settings();
+			$settingsModel->type = 'map_link';
+			$settingsModel->value = $model->mapLink;
+			$settingsModel->save();
+			
+			return $this->redirect(['index']);
+			
+        } else {
+            $settingDetailArr = Settings::find()->all();
+			foreach($settingDetailArr as $settingDetail)
 			{
-				$model->contactPerson = $settingDetail->value;
+				if($settingDetail->type == 'designation')
+				{
+					$model->designation = $settingDetail->value;
+				}
+				if($settingDetail->type == 'address')
+				{
+					$model->address = $settingDetail->value;
+				}
+				if($settingDetail->type == 'contact_person')
+				{
+					$model->contactPerson = $settingDetail->value;
+				}
+				if($settingDetail->type == 'contact_no')
+				{
+					$model->contactNo = $settingDetail->value;
+				}
+				if($settingDetail->type == 'whatsapp_no')
+				{
+					$model->whatsappNo = $settingDetail->value;
+				}
+				if($settingDetail->type == 'email_id')
+				{
+					$model->emailID = $settingDetail->value;
+				}
+				if($settingDetail->type == 'facebook_link')
+				{
+					$model->facebookLink = $settingDetail->value;
+				}
+				if($settingDetail->type == 'twitter_link')
+				{
+					$model->twitterLink = $settingDetail->value;
+				}
+				if($settingDetail->type == 'gplus_link')
+				{
+					$model->gplusLink = $settingDetail->value;
+				}
+				if($settingDetail->type == 'youtube_link')
+				{
+					$model->youtubeLink = $settingDetail->value;
+				}
+				if($settingDetail->type == 'rss_link')
+				{
+					$model->rssLink = $settingDetail->value;
+				}
+				if($settingDetail->type == 'map_link')
+				{
+					$model->mapLink = $settingDetail->value;
+				}
 			}
-			if($settingDetail->type == 'contact_no')
-			{
-				$model->contactNo = $settingDetail->value;
-			}
-			if($settingDetail->type == 'whatsapp_no')
-			{
-				$model->whatsappNo = $settingDetail->value;
-			}
-			if($settingDetail->type == 'email_id')
-			{
-				$model->emailID = $settingDetail->value;
-			}
-			if($settingDetail->type == 'facebook_link')
-			{
-				$model->facebookLink = $settingDetail->value;
-			}
-			if($settingDetail->type == 'twitter_link')
-			{
-				$model->twitterLink = $settingDetail->value;
-			}
-			if($settingDetail->type == 'gplus_link')
-			{
-				$model->gplusLink = $settingDetail->value;
-			}
-			if($settingDetail->type == 'youtube_link')
-			{
-				$model->youtubeLink = $settingDetail->value;
-			}
-			if($settingDetail->type == 'rss_link')
-			{
-				$model->rssLink = $settingDetail->value;
-			}
-			if($settingDetail->type == 'map_link')
-			{
-				$model->mapLink = $settingDetail->value;
-			}
-		}
-	
-		return $this->render('view', [
-            'model' => $model,
-        ]);
-	
-        /*$searchModel = new SettingsSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);*/
+		
+			return $this->render('create', [
+				'model' => $model,
+			]);
+        }
     }
 
     /**
@@ -101,8 +169,60 @@ class SettingsController extends ControllerAdmin
     {
         $model = new Settings();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->settingsID]);
+        if ($model->load(Yii::$app->request->post())) {
+		
+			$model->truncateTable();
+		
+			$model = new Settings();
+			$model->type = 'contact_person';
+			$model->value = $model->contactPerson;
+			$model->save();
+			
+			$model = new Settings();
+			$model->type = 'contact_no';
+			$model->value = $model->contactNo;
+			$model->save();
+			
+			$model = new Settings();
+			$model->type = 'whatsapp_no';
+			$model->value = $model->whatsappNo;
+			$model->save();
+			
+			$model = new Settings();
+			$model->type = 'email_id';
+			$model->value = $model->emailID;
+			$model->save();
+			
+			$model = new Settings();
+			$model->type = 'facebook_link';
+			$model->value = $model->facebookLink;
+			$model->save();
+			
+			$model = new Settings();
+			$model->type = 'twitter_link';
+			$model->value = $model->twitterLink;
+			$model->save();
+			
+			$model = new Settings();
+			$model->type = 'gplus_link';
+			$model->value = $model->gplusLink;
+			$model->save();
+			
+			$model = new Settings();
+			$model->type = 'youtube_link';
+			$model->value = $model->youtubeLink;
+			$model->save();
+			
+			$model = new Settings();
+			$model->type = 'rss_link';
+			$model->value = $model->rssLink;
+			$model->save();
+			
+			$model = new Settings();
+			$model->type = 'map_link';
+			$model->value = $model->mapLink;
+			$model->save();
+			
         } else {
             return $this->render('create', [
                 'model' => $model,

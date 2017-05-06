@@ -532,5 +532,10 @@ return $error;
 	  	return $uploadedPath;
 	  	}
 	}
+	
+	public function getSettingsValue($type)
+	{
+		return self::getData("SELECT `value` from `app_settings` WHERE `type` = '$type'");
+	}
 }
 ?>
