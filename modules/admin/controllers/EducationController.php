@@ -5,30 +5,14 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\modules\admin\models\Education;
 use app\modules\admin\models\EducationSearch;
-use yii\web\Controller;
+use app\modules\admin\ControllerAdmin;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * EducationController implements the CRUD actions for Education model.
  */
-class EducationController extends Controller
+class EducationController extends ControllerAdmin
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Lists all Education models.
      * @return mixed
@@ -66,7 +50,7 @@ class EducationController extends Controller
         $model = new Education();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->educationID]);
+            return $this->redirect(['create']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -85,7 +69,7 @@ class EducationController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->educationID]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,

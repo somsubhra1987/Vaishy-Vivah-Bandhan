@@ -64,6 +64,12 @@ class UserMasterSearch extends UserMaster
             'dob' => $this->dob,
             'height' => $this->height,
             'age' => $this->age,
+			'education' => $this->education,
+			'employmentSector' => $this->employmentSector,
+			'occupation' => $this->occupation,
+			'country' => $this->country,
+			'state' => $this->state,
+			'bodyType' => $this->bodyType,
             'isActive' => $this->isActive,
         ]);
 
@@ -75,15 +81,12 @@ class UserMasterSearch extends UserMaster
             ->andFilterWhere(['like', 'userPassword', $this->userPassword])
             ->andFilterWhere(['like', 'phoneNo', $this->phoneNo])
             ->andFilterWhere(['like', 'address', $this->address])
-            ->andFilterWhere(['like', 'country', $this->country])
-            ->andFilterWhere(['like', 'state', $this->state])
             ->andFilterWhere(['like', 'city', $this->city])
             ->andFilterWhere(['like', 'subject', $this->subject])
             ->andFilterWhere(['like', 'personalInfo', $this->personalInfo])
             ->andFilterWhere(['like', 'aboutFamily', $this->aboutFamily])
             ->andFilterWhere(['like', 'partnerPreference', $this->partnerPreference])
             ->andFilterWhere(['like', 'profileCreatedFor', $this->profileCreatedFor])
-            ->andFilterWhere(['like', 'bodyType', $this->bodyType])
             ->andFilterWhere(['like', 'physicalStatus', $this->physicalStatus]);
 
         return $dataProvider;

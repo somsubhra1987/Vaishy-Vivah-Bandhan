@@ -5,14 +5,13 @@ use yii\grid\GridView;
 use app\lib\CustomHtml;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\admin\models\EducationSearch */
+/* @var $searchModel app\modules\admin\models\OccupationSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Educations';
+$this->title = 'Occupations';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="education-index">
-
+<div class="occupation-index">
     <?=CustomHtml::getAddNewButton()?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -20,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             CustomHtml::getEditActionIcon(),
 
-            'degree',
+            'occupation',
 
             CustomHtml::getDeleteActionIcon(),
         ],

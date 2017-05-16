@@ -5,30 +5,14 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\modules\admin\models\EmploymentSector;
 use app\modules\admin\models\EmploymentSectorSearch;
-use yii\web\Controller;
+use app\modules\admin\ControllerAdmin;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * EmploymentsectorController implements the CRUD actions for EmploymentSector model.
  */
-class EmploymentsectorController extends Controller
+class EmploymentsectorController extends ControllerAdmin
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Lists all EmploymentSector models.
      * @return mixed
@@ -66,7 +50,7 @@ class EmploymentsectorController extends Controller
         $model = new EmploymentSector();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->employmentSectorID]);
+            return $this->redirect(['create']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -85,7 +69,7 @@ class EmploymentsectorController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->employmentSectorID]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,

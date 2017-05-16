@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\lib\Core;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\State */
@@ -12,9 +13,9 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'state')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'state')->textInput(['maxlength' => true, 'autofocus' => 'autofocus']) ?>
 
-    <?= $form->field($model, 'countryID')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'countryID')->dropDownList(Core::getCountryAssoc(), ['prompt' => '--Select Country--']) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

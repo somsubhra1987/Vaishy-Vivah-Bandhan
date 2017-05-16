@@ -5,30 +5,15 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\modules\admin\models\State;
 use app\modules\admin\models\StateSearch;
-use yii\web\Controller;
+use app\modules\admin\ControllerAdmin;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * StateController implements the CRUD actions for State model.
  */
-class StateController extends Controller
+class StateController extends ControllerAdmin
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Lists all State models.
      * @return mixed
@@ -66,7 +51,7 @@ class StateController extends Controller
         $model = new State();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->stateID]);
+            return $this->redirect(['create']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -85,7 +70,7 @@ class StateController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->stateID]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,

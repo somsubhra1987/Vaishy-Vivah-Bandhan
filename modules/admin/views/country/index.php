@@ -20,7 +20,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             CustomHtml::getEditActionIcon(),
 
-            'countryID',
             'country',
 
             CustomHtml::getDeleteActionIcon(),

@@ -3,23 +3,39 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\modules\admin\models\BodyType;
-use app\modules\admin\models\BodyTypeSearch;
-use app\modules\admin\ControllerAdmin;
+use app\modules\admin\models\Occupation;
+use app\modules\admin\models\OccupationSearch;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 
 /**
- * BodytypeController implements the CRUD actions for BodyType model.
+ * OccupationController implements the CRUD actions for Occupation model.
  */
-class BodytypeController extends ControllerAdmin
+class OccupationController extends Controller
 {
     /**
-     * Lists all BodyType models.
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * Lists all Occupation models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new BodyTypeSearch();
+        $searchModel = new OccupationSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -29,7 +45,7 @@ class BodytypeController extends ControllerAdmin
     }
 
     /**
-     * Displays a single BodyType model.
+     * Displays a single Occupation model.
      * @param string $id
      * @return mixed
      */
@@ -41,13 +57,13 @@ class BodytypeController extends ControllerAdmin
     }
 
     /**
-     * Creates a new BodyType model.
+     * Creates a new Occupation model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new BodyType();
+        $model = new Occupation();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['create']);
@@ -59,7 +75,7 @@ class BodytypeController extends ControllerAdmin
     }
 
     /**
-     * Updates an existing BodyType model.
+     * Updates an existing Occupation model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
@@ -78,7 +94,7 @@ class BodytypeController extends ControllerAdmin
     }
 
     /**
-     * Deletes an existing BodyType model.
+     * Deletes an existing Occupation model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
@@ -91,15 +107,15 @@ class BodytypeController extends ControllerAdmin
     }
 
     /**
-     * Finds the BodyType model based on its primary key value.
+     * Finds the Occupation model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return BodyType the loaded model
+     * @return Occupation the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = BodyType::findOne($id)) !== null) {
+        if (($model = Occupation::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

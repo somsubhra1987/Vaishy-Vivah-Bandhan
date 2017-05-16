@@ -5,30 +5,14 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\modules\admin\models\Country;
 use app\modules\admin\models\CountrySearch;
-use yii\web\Controller;
+use app\modules\admin\ControllerAdmin;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * CountryController implements the CRUD actions for Country model.
  */
-class CountryController extends Controller
+class CountryController extends ControllerAdmin
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Lists all Country models.
      * @return mixed
@@ -66,7 +50,7 @@ class CountryController extends Controller
         $model = new Country();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->countryID]);
+            return $this->redirect(['create']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -85,7 +69,7 @@ class CountryController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->countryID]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,

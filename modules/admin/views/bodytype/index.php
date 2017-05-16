@@ -19,8 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             CustomHtml::getEditActionIcon(),
-
-            'bodyTypeID',
+			
             'bodyType',
 
             CustomHtml::getDeleteActionIcon(),

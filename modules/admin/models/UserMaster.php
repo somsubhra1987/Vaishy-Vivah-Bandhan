@@ -49,7 +49,7 @@ class UserMaster extends \yii\db\ActiveRecord
     {
         return [
             [['firstName', 'gender', 'dob', 'email', 'userPassword'], 'required'],
-            [['dob', 'age', 'lastName', 'height', 'createDate'], 'safe'],
+            [['dob', 'age', 'lastName', 'height', 'education', 'employmentSector', 'occupation', 'createDate'], 'safe'],
             [['address', 'personalInfo', 'aboutFamily', 'partnerPreference'], 'string'],
             [['height'], 'number'],
             [['isActive'], 'integer'],
