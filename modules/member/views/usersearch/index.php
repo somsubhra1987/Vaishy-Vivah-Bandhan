@@ -1,7 +1,10 @@
 <?php
 use yii\helpers\Html;
 use app\lib\Core;
+use app\lib\CustomFunctions;
 use yii\widgets\ActiveForm;
+
+$stateUrl = Yii::$app->getUrlManager()->createUrl(['member/default/stateagainstcountry'])
 ?>
 <!-- Start Feature -->
 <section id="feature">
@@ -98,11 +101,11 @@ use yii\widgets\ActiveForm;
 
                     <tr>
                     <td colspan="3">
-                      <select class="form-control">
-                        
-                        <option>Bachelors - Engineering (1)</option>
-                        <option>----</option>
-                        <option>----</option>
+                      <select class="form-control" name="userMasterSearch[education]" id="userMasterSearch[education]">
+                        <option value="">---</option>
+                        <?php foreach(CustomFunctions::getEducationAssoc() as $key => $value){ ?>
+                        <option value="<?php echo $key; ?>" <?php if($searchModel->education == $key){ ?> selected="selected" <?php } ?>><?php echo $value; ?></option>
+                        <?php } ?>
                       </select>
                     </td>
                     </tr>
@@ -113,10 +116,11 @@ use yii\widgets\ActiveForm;
 
                     <tr>
                       <td colspan="3">
-                        <select class="form-control">
-                          <option>Private (1)</option>
-                          <option>----</option>
-                          <option>----</option>
+                        <select class="form-control" name="userMasterSearch[employmentSector]" id="userMasterSearch[employmentsector]">
+                          <option value="">---</option>
+                          <?php foreach(CustomFunctions::getEmploymentSectorAssoc() as $key => $value){ ?>
+                          <option value="<?php echo $key; ?>" <?php if($searchModel->employmentSector == $key){ ?> selected="selected" <?php } ?>><?php echo $value; ?></option>
+                          <?php } ?>
                         </select>
                       </td>
                     </tr>
@@ -127,24 +131,25 @@ use yii\widgets\ActiveForm;
 
                     <tr>
                       <td colspan="3">
-                        <select class="form-control">
-                          <option>Financial Accountant (1)</option>
-                          <option>----</option>
-                          <option>----</option>
+                        <select class="form-control" name="userMasterSearch[occupation]" id="usermastersearch-occupation">
+                          <option value="">---</option>
+                          <?php foreach(CustomFunctions::getOccupationAssoc() as $key => $value){ ?>
+                          <option value="<?php echo $key; ?>" <?php if($searchModel->occupation == $key){ ?> selected="selected" <?php } ?>><?php echo $value; ?></option>
+                          <?php } ?>
                         </select>
                       </td>
-                    </tr> 
-
+                    </tr>
 
                     <tr>
                       <td colspan="3"> Country living in </td>
                     </tr>
                     <tr>
                       <td colspan="3">
-                        <select class="form-control">
-                          <option>India (1)</option>
-                          <option>----</option>
-                          <option>----</option>
+                        <select class="form-control" name="userMasterSearch[country]" id="usermastersearch-country" onchange="getState(this.value);">
+                          <option value="">---</option>
+                          <?php foreach(Core::getCountryAssoc() as $key => $value){ ?>
+                          <option value="<?php echo $key; ?>" <?php if($searchModel->country == $key){ ?> selected="selected" <?php } ?>><?php echo $value; ?></option>
+                          <?php } ?>
                         </select>
                       </td>
                     </tr>
@@ -154,10 +159,9 @@ use yii\widgets\ActiveForm;
                     </tr>
                     <tr>
                       <td colspan="3">
-                        <select class="form-control">
-                          <option>Himachal Pradesh (1)</option>
-                          <option>----</option>
-                          <option>----</option>
+                        <select class="form-control" name="userMasterSearch[state]" id="usermastersearch-state">
+                          <option value="">---</option>
+                          
                         </select>
                       </td>
                     </tr>
@@ -168,10 +172,11 @@ use yii\widgets\ActiveForm;
 
                     <tr>
                       <td colspan="3">
-                        <select class="form-control">
-                          <option>Slim</option>
-                          <option>----</option>
-                          <option>----</option>
+                        <select class="form-control" name="userMasterSearch[bodyType]" id="usermastersearch-bodytype">
+                          <option value="">---</option>
+                          <?php foreach(CustomFunctions::getBodyTypeAssoc() as $key => $value){ ?>
+                          <option value="<?php echo $key; ?>" <?php if($searchModel->bodyType == $key){ ?> selected="selected" <?php } ?>><?php echo $value; ?></option>
+                          <?php } ?>
                         </select>
                       </td>
                     </tr>
@@ -320,3 +325,22 @@ use yii\widgets\ActiveForm;
   </div> 
 </section>
 <!-- End Feature -->
+<script type="text/javascript">
+	function getState(countryID)
+	{
+		$.ajax({
+			method:'GET',
+			dataType: 'json',
+			url:'<?php echo $stateUrl; ?>',
+			data:{countryID:countryID},
+			beforeSend:function(){
+				$("#usermastersearch-state").html('<option value="">---</options>');
+			},
+			success:function(response) {
+				$.each(response, function(i, value) {
+					$('#usermastersearch-state').append($('<option>').text(value).attr('value', i));
+				});
+			}
+		});
+	}
+</script>

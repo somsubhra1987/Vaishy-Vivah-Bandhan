@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use app\lib\Core;
 
 $this->title = 'Contact Us';
 ?>
@@ -14,7 +15,7 @@ $this->title = 'Contact Us';
         <div class="top"></div>
         <div class="middle">
           <div class="map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.632328929365!2d88.35216051442004!3d22.592850685172387!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0277c8b746ce97%3A0x7c435c1d317521fd!2s79%2C+Nimtala+Ghat+St%2C+Jorabagan%2C+Kolkata%2C+West+Bengal+700006!5e0!3m2!1sen!2sin!4v1487812228842" width="285" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
+            <iframe src="<?php echo Core::getSettingsValue('map_link'); ?>" width="285" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
           </div>
         </div>
         <div class="bottom"></div>
@@ -46,12 +47,12 @@ $this->title = 'Contact Us';
         <h1><em>Get in Touch</em></h1>
         <div class="top"></div>
         <div class="middle">
-          <p> <strong>Sri Ajay Shaw,</strong> Vice Properties Advisor. 79/c Nimtalla Ghat Street, Kolkata-700006, <br />
+          <p> <strong><?php echo Core::getSettingsValue('contact_person').','; ?></strong> <?php echo Core::getSettingsValue('designation').'. '.Core::getSettingsValue('address'); ?> <br />
             <br />
           </p>
-          <p><?php echo Html::img(Yii::$app->getUrlManager()->getBaseUrl()."/themes/frontend/vivahBandhan/images/phone.png", ['alt' => '', 'align' => 'absmiddle']);?> : &nbsp;  +91   9674535521 </p>
-          <p><?php echo Html::img(Yii::$app->getUrlManager()->getBaseUrl()."/themes/frontend/vivahBandhan/images/WhatsApp_Icon.png", ['alt' => '', 'align' => 'absmiddle']);?> :   &nbsp; 9903809974 </p>
-          <p> <?php echo Html::img(Yii::$app->getUrlManager()->getBaseUrl()."/themes/frontend/vivahBandhan/images/mail.png", ['alt' => '', 'align' => 'absmiddle']);?> :  &nbsp; ajayshaw1959@gmail.com </p>
+          <p><?php echo Html::img(Yii::$app->getUrlManager()->getBaseUrl()."/themes/frontend/vivahBandhan/images/phone.png", ['alt' => '', 'align' => 'absmiddle']).' : &nbsp; '.Core::getSettingsValue('contact_no');?> </p>
+          <p><?php echo Html::img(Yii::$app->getUrlManager()->getBaseUrl()."/themes/frontend/vivahBandhan/images/WhatsApp_Icon.png", ['alt' => '', 'align' => 'absmiddle']).' : &nbsp; '.Core::getSettingsValue('whatsapp_no');?> </p>
+          <p> <?php echo Html::img(Yii::$app->getUrlManager()->getBaseUrl()."/themes/frontend/vivahBandhan/images/mail.png", ['alt' => '', 'align' => 'absmiddle']).' : &nbsp; '.Core::getSettingsValue('email_ID');?> </p>
           <p>&nbsp;</p>
           <p> <?php echo Html::img(Yii::$app->getUrlManager()->getBaseUrl()."/themes/frontend/vivahBandhan/images/contact.png", ['alt' => '', 'align' => 'absmiddle', 'width' => '100%']);?> </p>
         </div>

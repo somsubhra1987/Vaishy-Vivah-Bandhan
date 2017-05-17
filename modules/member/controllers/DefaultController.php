@@ -5,6 +5,7 @@ use Yii;
 use app\modules\member\Controller;
 use app\models\UserMaster;
 use app\lib\Core;
+use app\lib\CustomFunctions;
 use yii\web\UploadedFile;
 /**
  * Default controller for the `member` module
@@ -110,6 +111,12 @@ class DefaultController extends Controller
             'model'=>$model
         ]);
     }
+	
+	public function actionStateagainstcountry($countryID)
+	{
+		$stateData = CustomFunctions::getStateAssoc($countryID);
+		return json_encode($stateData);
+	}
 
     protected function findModel($id)
     {

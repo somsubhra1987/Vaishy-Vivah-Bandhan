@@ -438,14 +438,14 @@ return $error;
 	
 	public function getCountryAssoc()
 	{
-		$sql = "SELECT countryCode, countryName FROM app_country ORDER BY countryName";
+		$sql = "SELECT countryID, country FROM user_country ORDER BY country";
 		$countryList = self::getDropdownAssoc($sql);
 		return $countryList;
 	}
-	public function getCountryName($countryCode)
+	public function getCountryName($countryID)
 	{
-		$sql = "SELECT countryName FROM app_country WHERE countryCode = :countryCode";
-		return self::getData($sql, array(':countryCode'=>$countryCode));
+		$sql = "SELECT country FROM user_country WHERE countryID = :countryID";
+		return self::getData($sql, array(':countryID' => $countryID));
 	}
 	function getAdminGroupAssoc()
 	{	
@@ -533,6 +533,7 @@ return $error;
 	  	}
 	}
 
+
 	public function getAllUploadedImageByProfileID($refID, $filethumb = 1)
 	{
 		$refTable = 'user_master';
@@ -560,6 +561,11 @@ return $error;
 	  		array_push($response, $arr);
 		}
 		return $response;	
+	}
+	
+	public function getSettingsValue($type)
+	{
+		return self::getData("SELECT `value` from `app_settings` WHERE `type` = '$type'");
 	}
 }
 ?>

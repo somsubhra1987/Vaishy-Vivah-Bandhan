@@ -13,7 +13,7 @@ use Yii;
  */
 class Settings extends \yii\db\ActiveRecord
 {
-	public $contactPerson, $contactNo, $whatsappNo, $emailID, $facebookLink, $twitterLink, $gplusLink, $youtubeLink, $rssLink, $mapLink;
+	public $contactPerson, $designation, $address, $contactNo, $whatsappNo, $emailID, $facebookLink, $twitterLink, $gplusLink, $youtubeLink, $rssLink, $mapLink;
 
     /**
      * @inheritdoc
@@ -33,7 +33,7 @@ class Settings extends \yii\db\ActiveRecord
             [['value'], 'string'],
             [['type'], 'string', 'max' => 255],
             [['type'], 'unique'],
-			[['value', 'contactPerson', 'contactNo', 'whatsappNo', 'emailID', 'facebookLink', 'twitterLink', 'gplusLink', 'youtubeLink', 'rssLink', 'mapLink'], 'safe'],
+			[['value', 'contactPerson', 'contactNo', 'whatsappNo', 'emailID', 'facebookLink', 'twitterLink', 'gplusLink', 'youtubeLink', 'rssLink', 'mapLink', 'designation', 'address'], 'safe'],
         ];
     }
 
@@ -56,6 +56,14 @@ class Settings extends \yii\db\ActiveRecord
 			'youtubeLink' => 'Youtube Link',
 			'rssLink' => 'RSS Link',
 			'mapLink' => 'Google Map Link',
+			'designation' => 'Designation',
+			'address' => 'Address',
         ];
     }
+	
+	public function truncateTable()
+	{
+	 	Yii::$app->db->createCommand("TRUNCATE TABLE `app_settings`")->execute();
+		return true;
+	}
 }

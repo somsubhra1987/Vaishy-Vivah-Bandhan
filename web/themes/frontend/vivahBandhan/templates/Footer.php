@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use app\lib\Core;
 ?>
 <div class="making-area">
   <div class=" container">
@@ -25,7 +26,7 @@ use yii\helpers\Html;
       <p>&copy; 2017 All rights reserved by <span class="yellow"> Vaishy Vivah Bandhan </span></p>
     </div>
     <div class="get-in-touch">Get In Touch With Us !
-      <div class="social"> <a href="https://www.facebook.com/Vaishy-Vivah-Bandhan-1461081057298345/" class="facebook"></a> <a href="#" class="twitter"></a> <a href="#" class="google"></a> <a href="#" class="you-tube"></a> <a href="#" class="rss"></a> </div>
+      <div class="social"> <a href="<?php echo Core::getSettingsValue('facebook_link'); ?>" class="facebook"></a> <a href="<?php echo Core::getSettingsValue('twitter_link'); ?>" class="twitter"></a> <a href="<?php echo Core::getSettingsValue('gplus_link'); ?>" class="google"></a> <a href="<?php echo Core::getSettingsValue('youtube_link'); ?>" class="you-tube"></a> <a href="<?php echo Core::getSettingsValue('rss_link'); ?>" class="rss"></a> </div>
     </div>
   </div>
 </div>
