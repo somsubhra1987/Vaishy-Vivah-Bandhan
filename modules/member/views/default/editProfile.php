@@ -2,10 +2,13 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\lib\Core;
 /* @var $this yii\web\View */
 /* @var $model app\modules\member\models\AppUser */
 /* @var $form yii\widgets\ActiveForm */
 $this->title = "Edit Profile";
+$imageList = Core::getAllUploadedImageByProfileID($model->userID);
+//Core::printR($imageList);
 ?>
 <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -25,6 +28,23 @@ $this->title = "Edit Profile";
 
                 <?php echo $form->field($model, 'fileName')->fileInput(['accept' => 'image/*']);?>
 
+                <div class="row">
+                	<?php
+                	if(!empty($imageList))
+                	{
+                		foreach($imageList as $key=>$imageData)
+                		{
+                			$isActive = ($imageData['showInDp'])? 'isActive' : '';
+                			?>
+                			<div class="col-md-3 profileImage">
+                				<img id="<?=$imageData['imageID']?>" src="<?=$imageData['fileName']?>" class="img-thumbnail <?=$isActive?>"> 
+                			</div>
+                			<?php                			
+                		}                	          
+                	}
+                	?>
+                </div>
+
                 <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
@@ -41,3 +61,13 @@ $this->title = "Edit Profile";
         </div>
     </div>
 </div>
+<?php
+$this->registerCss('
+img::before{
+    content: "Read this -";
+    background-color: yellow;
+    color: red;
+    font-weight: bold;
+}
+')
+?>

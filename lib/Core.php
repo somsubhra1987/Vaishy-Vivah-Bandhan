@@ -532,5 +532,34 @@ return $error;
 	  	return $uploadedPath;
 	  	}
 	}
+
+	public function getAllUploadedImageByProfileID($refID, $filethumb = 1)
+	{
+		$refTable = 'user_master';
+		$response = array();
+		$uploadedPath = self::getUploadedUrl();
+	  	$uploadedPath .=  "/".$refTable."/";
+	  	if($filethumb){
+	  	$uploadedPath .= "thumb/thumb_";
+	  	}
+		$sql = "SELECT 
+					ID,
+	  				fileName,
+	  				showInDp 
+	  			FROM user_uploaded_images WHERE refID = :refID 
+	  			AND refTable = :refTable 
+	  			AND adminVerifiedStatus = '1'
+	  			";
+	  	$imageAssoc = self::getRows($sql, array(':refID'=>$refID, ':refTable'=>$refTable));
+	  	foreach($imageAssoc as $imageData)
+	  	{
+	  		$arr = array();
+	  		$arr['fileName'] = $uploadedPath.$imageData['fileName'];
+	  		$arr['imageID'] = $imageData['ID'];
+	  		$arr['showInDp'] = $imageData['showInDp'];
+	  		array_push($response, $arr);
+		}
+		return $response;	
+	}
 }
 ?>
