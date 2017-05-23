@@ -86,8 +86,13 @@ class userMasterSearch extends userMaster
     }
 
     public function searchmatche($params){
-       // Core::printR($params);
+       // Core::printR($params);        
+        $query = UserMaster::find();
         $this->load($params);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
         $this->gender = Core::getOpositeGender(Core::getLoggedUser()->gender);
 
         if($this->age){
@@ -97,7 +102,7 @@ class userMasterSearch extends userMaster
             $this->dob2 = Core::prepareDate($this->age2);            
         }
 
-        $query = UserMaster::find()->where('1');
+        //$query = UserMaster::find()->where('1');
 
         if($this->age!= '' && $this->age2 != ''){
             $query->andWhere(['between','dob', $this->dob2, $this->dob]);
@@ -112,10 +117,10 @@ class userMasterSearch extends userMaster
         }
 
 
-        $dataList = $query->all();
+        //$dataList = $query->all();
 
-        $rwquery = $query->createCommand()->getRawSql();
+        //$rwquery = $query->createCommand()->getRawSql();
        // die($rwquery);
-        return $dataList;
+        return $dataProvider;
     }
 }

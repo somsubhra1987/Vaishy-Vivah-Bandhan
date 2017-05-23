@@ -27,7 +27,7 @@ class UsersearchController extends Controller
     {
         $searchModel = new userMasterSearch();
         $dataProvider = $searchModel->searchmatche(Yii::$app->request->queryParams);
-
+        
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

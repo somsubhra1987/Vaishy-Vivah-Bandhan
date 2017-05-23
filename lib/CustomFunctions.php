@@ -54,5 +54,13 @@ class CustomFunctions
 				
 		return Core::getDropdownAssoc($sql);
 	}
+
+	function getProfileCreatedForAssoc()
+	{
+		$sql = "SELECT ID, description
+				FROM app_profilecreated_for				
+				ORDER BY description ASC";				
+		return Core::getDropdownAssoc($sql);
+	}
 }
 ?>

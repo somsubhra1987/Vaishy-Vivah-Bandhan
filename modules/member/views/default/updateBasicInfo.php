@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\lib\Core;
+use app\lib\CustomFunctions;
 use yii\jui\DatePicker;
 /* @var $this yii\web\View */
 /* @var $model app\modules\member\models\AppUser */
@@ -28,9 +29,9 @@ if($model->dob == '0000-00-00'){
                 
                 <?= $form->field($model, 'dob')->widget(DatePicker::classname(), ['dateFormat' => 'yyyy-MM-dd', 'options' => ['class' => 'form-control']]) ?>
 
-                <?= $form->field($model, 'profileCreatedFor')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'profileCreatedFor')->dropDownList(CustomFunctions::getProfileCreatedForAssoc(), ['prompt'=>''])?>
 
-                <?= $form->field($model, 'bodyType')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'bodyType')->dropDownList(CustomFunctions::getBodyTypeAssoc(), ['prompt'=>''])?>
 
                 <?= $form->field($model, 'height')->dropDownList(Core::getHeightList(), ['prompt' => ''])->label('Height (ft.)')?>
 

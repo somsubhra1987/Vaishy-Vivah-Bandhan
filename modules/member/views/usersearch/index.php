@@ -215,7 +215,8 @@ $stateUrl = Yii::$app->getUrlManager()->createUrl(['member/default/stateagainstc
 
                 <div class="col-lg-12 no-padding">
                 <?php
-                foreach ($dataProvider as $searchList) {                
+                foreach ($dataProvider as $searchList) {      
+                Core::printR($searchList);          
                 ?>
                   <table width="100%" border="0" cellspacing="0" cellpadding="0" class="match">
                     <tr>

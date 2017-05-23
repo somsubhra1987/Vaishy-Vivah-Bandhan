@@ -1,5 +1,6 @@
 <?php
 use app\lib\Core;
+use app\lib\CustomFunctions;
 ?><!-- Start Feature -->
 <section id="feature">
     <div class="container">
@@ -31,7 +32,7 @@ use app\lib\Core;
                         </div>
                         <div class="col-lg-9">
                             <h2><?=$userDetail->name?></h2>
-                            <p>Profile created for <?=$model->profileCreatedFor?> <br>
+                            <p>Profile created for <?=CustomFunctions::getProfileCreatedForAssoc()[$model->profileCreatedFor]?> <br>
                              <?php echo Core::getAgeByDate($model->dob)?> Yrs, <?php echo $model->height?>  In / 173 Cms<br>
                             Hindu, Kanyakubj Vaishy (Caste No Bar)<br>
                             Kolkata, West Bengal, India<br>
@@ -75,9 +76,9 @@ use app\lib\Core;
 
                             <tr>
                                 <td>Profile created for : </td>
-                                <td  class="name-table"><?php echo $model->profileCreatedFor?></td>
+                                <td  class="name-table"><?=CustomFunctions::getProfileCreatedForAssoc()[$model->profileCreatedFor]?></td>
                                 <td>Body Type / Complexion :</td>
-                                <td  class="name-table"><?php echo $model->bodyType?></td>
+                                <td  class="name-table"><?php echo CustomFunctions::getBodyTypeAssoc()[$model->bodyType]?></td>
                             </tr>
 
                             <tr>
