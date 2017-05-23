@@ -31,8 +31,15 @@ use app\lib\CustomFunctions;
                             <a class="edit-profile" href="javascript:void(0);" onclick=getModalData("<?=$updateUrl?>",this)>Edit Profile/Upload Photo</a>                            
                         </div>
                         <div class="col-lg-9">
-                            <h2><?=$userDetail->name?></h2>
-                            <p>Profile created for <?=CustomFunctions::getProfileCreatedForAssoc()[$model->profileCreatedFor]?> <br>
+                            <h2><?=$userDetail->name?></h2>                            
+                            <p>
+                            <?php
+                            if($model->profileCreatedFor !== null){
+                            ?>
+                            Profile created for <?=CustomFunctions::getProfileCreatedForAssoc()[$model->profileCreatedFor]?> <br>
+                            <?php
+                            }
+                            ?>
                              <?php echo Core::getAgeByDate($model->dob)?> Yrs, <?php echo $model->height?>  In / 173 Cms<br>
                             Hindu, Kanyakubj Vaishy (Caste No Bar)<br>
                             Kolkata, West Bengal, India<br>
@@ -76,9 +83,23 @@ use app\lib\CustomFunctions;
 
                             <tr>
                                 <td>Profile created for : </td>
-                                <td  class="name-table"><?=CustomFunctions::getProfileCreatedForAssoc()[$model->profileCreatedFor]?></td>
+                                <td  class="name-table">
+                                <?php
+                                if($model->profileCreatedFor !== null){
+                                ?>
+                                <?=CustomFunctions::getProfileCreatedForAssoc()[$model->profileCreatedFor]?>
+                                <?php
+                                }
+                                ?> 
+                                </td>
                                 <td>Body Type / Complexion :</td>
-                                <td  class="name-table"><?php echo CustomFunctions::getBodyTypeAssoc()[$model->bodyType]?></td>
+                                <td  class="name-table">
+                                <?php
+                                if($model->bodyType !== null){
+                                echo CustomFunctions::getBodyTypeAssoc()[$model->bodyType];
+                                }
+                                ?>                                    
+                                </td>
                             </tr>
 
                             <tr>

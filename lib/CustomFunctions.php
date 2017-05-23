@@ -57,9 +57,9 @@ class CustomFunctions
 
 	function getProfileCreatedForAssoc()
 	{
-		$sql = "SELECT ID, description
+		$sql = "SELECT ID, createdFor
 				FROM app_profilecreated_for				
-				ORDER BY description ASC";				
+				ORDER BY createdFor ASC";				
 		return Core::getDropdownAssoc($sql);
 	}
 }

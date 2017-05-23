@@ -7,6 +7,7 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\UserMaster;
 use app\lib\Core;
+use yii\data\Pagination;
 
 /**
  * userMasterSearch represents the model behind the search form about `app\models\userMaster`.
@@ -116,11 +117,18 @@ class userMasterSearch extends userMaster
             $query->andWhere(['gender'=>$this->gender]);
         }
 
+        $pagination = new Pagination([
+            'defaultPageSize'=>5,
+            'totalCount'=>$query->count(),
+            ]);
 
+        $dataProvider = $query->offset($pagination->offset)
+                        ->limit($pagination->limit)
+                        ->all();
         //$dataList = $query->all();
 
         //$rwquery = $query->createCommand()->getRawSql();
        // die($rwquery);
-        return $dataProvider;
+        return array('dataProvider'=>$dataProvider, 'pagination'=>$pagination);
     }
 }

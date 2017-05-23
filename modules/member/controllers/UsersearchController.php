@@ -26,11 +26,13 @@ class UsersearchController extends Controller
     public function actionIndex()
     {
         $searchModel = new userMasterSearch();
-        $dataProvider = $searchModel->searchmatche(Yii::$app->request->queryParams);
-        
+        $dataAssoc = $searchModel->searchmatche(Yii::$app->request->queryParams);
+        $dataProvider = $dataAssoc['dataProvider'];
+        $pagination = $dataAssoc['pagination'];
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'pagination'=> $pagination
         ]);
     }
 

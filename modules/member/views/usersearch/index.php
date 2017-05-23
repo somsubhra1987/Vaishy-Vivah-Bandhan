@@ -3,6 +3,7 @@ use yii\helpers\Html;
 use app\lib\Core;
 use app\lib\CustomFunctions;
 use yii\widgets\ActiveForm;
+use yii\widgets\LinkPager;
 
 $stateUrl = Yii::$app->getUrlManager()->createUrl(['member/default/stateagainstcountry'])
 ?>
@@ -215,8 +216,7 @@ $stateUrl = Yii::$app->getUrlManager()->createUrl(['member/default/stateagainstc
 
                 <div class="col-lg-12 no-padding">
                 <?php
-                foreach ($dataProvider as $searchList) {      
-                Core::printR($searchList);          
+                foreach ($dataProvider as $searchList) {                
                 ?>
                   <table width="100%" border="0" cellspacing="0" cellpadding="0" class="match">
                     <tr>
@@ -273,7 +273,19 @@ $stateUrl = Yii::$app->getUrlManager()->createUrl(['member/default/stateagainstc
                   </table>
                   <?php
                   }
-                ?>                 
+                ?> 
+                  <div class="row">
+                      <div class="col-sm-12 col-md-12">
+                      <?=LinkPager::widget([
+                      'pagination' => $pagination,
+                      'prevPageLabel' => '<span class="glyphicon glyphicon-chevron-left"></span>Prev',
+                      'nextPageLabel' => 'Next <span class="glyphicon glyphicon-chevron-right"></span>',
+                      'firstPageLabel' => '<span class="glyphicon glyphicon-fast-backward"></span>First',
+                      'lastPageLabel' => 'Last <span class="glyphicon glyphicon-fast-forward"></span>',               
+                      'maxButtonCount' => 5,
+                      ]) ?>
+                      </div>
+                  </div>                
                 </div>
               </div>
         <!--right-->
