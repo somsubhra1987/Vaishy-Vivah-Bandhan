@@ -121,7 +121,7 @@ class userMasterSearch extends userMaster
             $query->andWhere(['country'=>$this->country]);
         }
         $pagination = new Pagination([
-            'defaultPageSize'=>1,
+            'defaultPageSize'=>5,
             'totalCount'=>$query->count(),
             ]);
 

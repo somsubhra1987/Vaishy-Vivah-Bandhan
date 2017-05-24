@@ -40,10 +40,10 @@ use app\lib\CustomFunctions;
                             <?php
                             }
                             ?>
-                             <?php echo Core::getAgeByDate($model->dob)?> Yrs, <?php echo $model->height?>  In / 173 Cms<br>
+                             <?php echo Core::getAgeByDate($model->dob)?> Yrs, <?php echo $model->height?>  ft / <?php echo round($model->height * 30.48, 0); ?> Cms<br>
                             Hindu, Kanyakubj Vaishy (Caste No Bar)<br>
-                            Kolkata, West Bengal, India<br>
-                            B.Com., Marketing Professional
+                            <?php echo $model->city.', '.CustomFunctions::getStateAssoc($model->country)[$model->state].', '.core::getCountryAssoc()[$model->country];?><br>
+                            <?php echo CustomFunctions::getEducationAssoc()[$model->education].', '.CustomFunctions::getOccupationAssoc()[$model->occupation];?>
                             </p>
                             <p>
                             <?php

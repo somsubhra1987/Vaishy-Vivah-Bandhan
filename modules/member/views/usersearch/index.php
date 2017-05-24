@@ -257,8 +257,8 @@ $stateUrl = Yii::$app->getUrlManager()->createUrl(['member/default/stateagainstc
                         <p> <strong>  Religion:</strong> Hindu</p>
                         <p> <strong> Caste:</strong> Caste no bar (Caste No Bar)</p>
                         <p> <strong>  Location:</strong> <?=$searchList->address?></p>
-                        <p> <strong> Education :</strong> BCA</p>
-                        <p> <strong> Profession:</strong> Financial Accountant</p>
+                        <p> <strong> Education :</strong> <?= CustomFunctions::getEducationAssoc()[$searchList->education]; ?></p>
+                        <p> <strong> Profession:</strong> <?= CustomFunctions::getOccupationAssoc()[$searchList->occupation]; ?></p>
                         <p>  <strong>Annual Income:</strong> 1.20 lakhs</p>
                         <a href="#" class="blue-text"> View Full Profile</a> 
                       </td>                  
