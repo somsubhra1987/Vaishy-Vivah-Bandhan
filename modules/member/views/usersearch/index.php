@@ -278,9 +278,9 @@ $stateUrl = Yii::$app->getUrlManager()->createUrl(['member/default/stateagainstc
                       <div class="col-sm-12 col-md-12">
                       <?=LinkPager::widget([
                       'pagination' => $pagination,
-                      'prevPageLabel' => '<span class="glyphicon glyphicon-chevron-left"></span>Prev',
+                      'prevPageLabel' => '<span class="glyphicon glyphicon-chevron-left"></span> Prev',
                       'nextPageLabel' => 'Next <span class="glyphicon glyphicon-chevron-right"></span>',
-                      'firstPageLabel' => '<span class="glyphicon glyphicon-fast-backward"></span>First',
+                      'firstPageLabel' => '<span class="glyphicon glyphicon-fast-backward"></span> First',
                       'lastPageLabel' => 'Last <span class="glyphicon glyphicon-fast-forward"></span>',               
                       'maxButtonCount' => 5,
                       ]) ?>

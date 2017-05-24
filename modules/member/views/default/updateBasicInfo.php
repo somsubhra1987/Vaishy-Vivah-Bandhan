@@ -30,6 +30,12 @@ if($model->dob == '0000-00-00'){
                 <?= $form->field($model, 'dob')->widget(DatePicker::classname(), ['dateFormat' => 'yyyy-MM-dd', 'options' => ['class' => 'form-control']]) ?>
 
                 <?= $form->field($model, 'profileCreatedFor')->dropDownList(CustomFunctions::getProfileCreatedForAssoc(), ['prompt'=>''])?>
+                                
+                <?= $form->field($model, 'education')->dropDownList(CustomFunctions::getEducationAssoc(), ['prompt'=>''])?>
+                
+                <?= $form->field($model, 'employmentSector')->dropDownList(CustomFunctions::getEmploymentSectorAssoc(), ['prompt'=>''])?>
+
+                <?= $form->field($model, 'occupation')->dropDownList(CustomFunctions::getOccupationAssoc(), ['prompt'=>''])?>
 
                 <?= $form->field($model, 'bodyType')->dropDownList(CustomFunctions::getBodyTypeAssoc(), ['prompt'=>''])?>
 
