@@ -29,19 +29,19 @@ if($model->dob == '0000-00-00'){
                 
                 <?= $form->field($model, 'dob')->widget(DatePicker::classname(), ['dateFormat' => 'yyyy-MM-dd', 'options' => ['class' => 'form-control']]) ?>
 
-                <?= $form->field($model, 'profileCreatedFor')->dropDownList(CustomFunctions::getProfileCreatedForAssoc(), ['prompt'=>''])?>
+                <?= $form->field($model, 'profileCreatedFor')->dropDownList(CustomFunctions::getProfileCreatedForAssoc(), ['prompt'=>'--Select--'])?>
                                 
-                <?= $form->field($model, 'education')->dropDownList(CustomFunctions::getEducationAssoc(), ['prompt'=>''])?>
+                <?= $form->field($model, 'education')->dropDownList(CustomFunctions::getEducationAssoc(), ['prompt'=>'--Select--'])?>
                 
-                <?= $form->field($model, 'employmentSector')->dropDownList(CustomFunctions::getEmploymentSectorAssoc(), ['prompt'=>''])?>
+                <?= $form->field($model, 'employmentSector')->dropDownList(CustomFunctions::getEmploymentSectorAssoc(), ['prompt'=>'--Select--'])?>
 
-                <?= $form->field($model, 'occupation')->dropDownList(CustomFunctions::getOccupationAssoc(), ['prompt'=>''])?>
+                <?= $form->field($model, 'occupation')->dropDownList(CustomFunctions::getOccupationAssoc(), ['prompt'=>'--Select--'])?>
 
-                <?= $form->field($model, 'bodyType')->dropDownList(CustomFunctions::getBodyTypeAssoc(), ['prompt'=>''])?>
+                <?= $form->field($model, 'bodyType')->dropDownList(CustomFunctions::getBodyTypeAssoc(), ['prompt'=>'--Select--'])?>
 
-                <?= $form->field($model, 'height')->dropDownList(Core::getHeightList(), ['prompt' => ''])->label('Height (ft.)')?>
+                <?= $form->field($model, 'height')->dropDownList(Core::getHeightList(), ['prompt' => '--Select--'])->label('Height (ft.)')?>
 
-                <?= $form->field($model, 'physicalStatus')->dropDownList(['normal'=>'Normal', 'strong'=>'Strong'], ['prompt' => ''])->label('Physical Status')?>
+                <?= $form->field($model, 'physicalStatus')->dropDownList(['normal'=>'Normal', 'strong'=>'Strong'], ['prompt' => '--Select--'])->label('Physical Status')?>
 
                 <div class="form-group">
                     <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

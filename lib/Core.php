@@ -55,7 +55,7 @@ class Core
 	    $sql = "SELECT
 	    			userID as id, 
 	    			firstName as name,
-	    			gender	    			 	    				    		
+	    			gender
 	   			FROM user_master
 	    		WHERE userID = :userID ";
 	    $cmd = $db->createCommand($sql);

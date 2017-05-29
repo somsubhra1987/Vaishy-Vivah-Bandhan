@@ -5,7 +5,7 @@ use app\lib\CustomFunctions;
 use yii\widgets\ActiveForm;
 use yii\widgets\LinkPager;
 
-$stateUrl = Yii::$app->getUrlManager()->createUrl(['member/default/stateagainstcountry'])
+$stateUrl = Yii::$app->getUrlManager()->createUrl(['member/default/stateagainstcountry']);
 ?>
 <!-- Start Feature -->
 <section id="feature">

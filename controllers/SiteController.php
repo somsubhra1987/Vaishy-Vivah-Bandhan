@@ -11,6 +11,7 @@ use app\models\ContactForm;
 use app\models\UserMaster;
 use yii\web\UploadedFile;
 use app\lib\Core;
+use app\lib\CustomFunctions;
 
 class SiteController extends Controller
 {
@@ -181,5 +182,11 @@ class SiteController extends Controller
     public function actionService()
     {
         return $this->render('service');
+    }
+
+    public function actionStateagainstcountry($countryID)
+    {
+        $stateData = CustomFunctions::getStateAssoc($countryID);
+        return json_encode($stateData);
     }
 }

@@ -2114,6 +2114,12 @@ border-left: 1px solid #fff;
   border-radius: 0;
 }
 
+.comments-form select{
+  height: 40px;
+  font-size: 16px;
+  border-radius: 0;
+}
+
 .comments-form textarea {
   border-radius: 0;
   font-size: 16px;

@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(0);
 $params = require(__DIR__ . '/params.php');
 
 $config = [

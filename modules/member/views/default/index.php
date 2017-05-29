@@ -34,7 +34,7 @@ use app\lib\CustomFunctions;
                             <h2><?=$userDetail->name?></h2>                            
                             <p>
                             <?php
-                            if($model->profileCreatedFor !== null){
+                            if($model->profileCreatedFor != 0){
                             ?>
                             Profile created for <?=CustomFunctions::getProfileCreatedForAssoc()[$model->profileCreatedFor]?> <br>
                             <?php
@@ -147,11 +147,11 @@ use app\lib\CustomFunctions;
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td >Country : </td>
-                                <td class="name-table"><?=$model->country?></td>
+                                <td class="name-table"><?=Core::getCountryAssoc()[$model->country]?></td>
                             </tr>
                             <tr>
                                 <td>State : </td>
-                                <td  class="name-table"><?=$model->state?></td>
+                                <td  class="name-table"><?=CustomFunctions::getStateAssoc($model->country)[$model->state]?></td>
                             </tr>
                             <tr>
                                 <td> City                 : </td>

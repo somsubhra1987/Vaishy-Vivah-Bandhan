@@ -5,9 +5,13 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use app\lib\Core;
+use app\lib\CustomFunctions;
 
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
+
+$stateUrl = Yii::$app->getUrlManager()->createUrl(['site/stateagainstcountry']);
 ?>
 <!-- Start Feature -->
 <section id="feature">
@@ -67,12 +71,29 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                     
                      <div class="form-group">                        
-                      <input type="text" class="form-control" placeholder="Address" name="UserMaster[address]">
+                      <textarea class="form-control" placeholder="Address" name="UserMaster[address]" rows="2"></textarea>
                     </div>
                     
+                    <div class="form-group">
+                      <select class="form-control" name="UserMaster[country]" onchange="getState(this.value);">
+                        <option value="0">--Select Country--</option>
+                        <?php foreach(Core::getCountryAssoc() as $key => $value){ ?>
+                          <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <select class="form-control" name="UserMaster[state]" id="usermaster-state">
+                        <option value="0">--Select State--</option>
+                        
+                      </select>
+                    </div>
+
                      <div class="form-group">                        
                       <input type="text" class="form-control" placeholder="City" name="UserMaster[city]">
                     </div>
+
                      <div class="form-group">                        
                       <input type="text" class="form-control" placeholder="D.O.B (YY-mm-dd)" name="UserMaster[dob]">
                     </div>
@@ -86,3 +107,23 @@ $this->params['breadcrumbs'][] = $this->title;
    </section>
   <!-- End Feature -->
   <?php $this->registerJsFile(Yii::$app->request->baseUrl.'/themes/frontend/vivahBandhan/js/loginRegister.js', ['depends' => [yii\web\JqueryAsset::className()]]); ?>
+
+  <script type="text/javascript">
+  function getState(countryID)
+  {
+    $.ajax({
+      method:'GET',
+      dataType: 'json',
+      url:'<?php echo $stateUrl; ?>',
+      data:{countryID:countryID},
+      beforeSend:function(){
+        $("#usermaster-state").html('<option value="0">--Select State--</options>');
+      },
+      success:function(response) {
+        $.each(response, function(i, value) {
+          $('#usermaster-state').append($('<option>').text(value).attr('value', i));
+        });
+      }
+    });
+  }
+</script>

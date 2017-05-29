@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\lib\Core;
+use app\lib\CustomFunctions;
 /* @var $this yii\web\View */
 /* @var $model app\modules\member\models\AppUser */
 /* @var $form yii\widgets\ActiveForm */
@@ -20,8 +21,8 @@ $stateUrl = Yii::$app->getUrlManager()->createUrl(['member/default/stateagainstc
             <div class="modal-body">
                 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
                 <?= $form->field($model, 'country')->dropDownList(Core::getCountryAssoc(),['prompt' => 'Select']) ?>
-                <?= $form->field($model, 'city')->dropDownList(['prompt' => 'Select']) ?>
-                <?= $form->field($model, 'state')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'state')->dropDownList(CustomFunctions::getStateAssoc($model->country), ['prompt' => 'Select']) ?>
+                <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
                 <div class="form-group">
                     <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
                 </div>
