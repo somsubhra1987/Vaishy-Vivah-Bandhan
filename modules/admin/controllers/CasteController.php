@@ -3,23 +3,23 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\modules\admin\models\Religion;
-use app\modules\admin\models\ReligionSearch;
+use app\modules\admin\models\Caste;
+use app\modules\admin\models\CasteSearch;
 use app\modules\admin\ControllerAdmin;
 use yii\web\NotFoundHttpException;
 
 /**
- * ReligionController implements the CRUD actions for Religion model.
+ * CasteController implements the CRUD actions for Caste model.
  */
-class ReligionController extends ControllerAdmin
+class CasteController extends ControllerAdmin
 {
     /**
-     * Lists all Religion models.
+     * Lists all Caste models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ReligionSearch();
+        $searchModel = new CasteSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -29,7 +29,7 @@ class ReligionController extends ControllerAdmin
     }
 
     /**
-     * Displays a single Religion model.
+     * Displays a single Caste model.
      * @param string $id
      * @return mixed
      */
@@ -41,13 +41,13 @@ class ReligionController extends ControllerAdmin
     }
 
     /**
-     * Creates a new Religion model.
+     * Creates a new Caste model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Religion();
+        $model = new Caste();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
@@ -59,7 +59,7 @@ class ReligionController extends ControllerAdmin
     }
 
     /**
-     * Updates an existing Religion model.
+     * Updates an existing Caste model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
@@ -78,7 +78,7 @@ class ReligionController extends ControllerAdmin
     }
 
     /**
-     * Deletes an existing Religion model.
+     * Deletes an existing Caste model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
@@ -91,15 +91,15 @@ class ReligionController extends ControllerAdmin
     }
 
     /**
-     * Finds the Religion model based on its primary key value.
+     * Finds the Caste model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return Religion the loaded model
+     * @return Caste the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Religion::findOne($id)) !== null) {
+        if (($model = Caste::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

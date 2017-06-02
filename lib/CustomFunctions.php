@@ -58,8 +58,44 @@ class CustomFunctions
 	function getProfileCreatedForAssoc()
 	{
 		$sql = "SELECT ID, createdFor
-				FROM app_profilecreated_for				
-				ORDER BY createdFor ASC";				
+				FROM app_profilecreated_for
+				ORDER BY createdFor ASC";
+		return Core::getDropdownAssoc($sql);
+	}
+	
+	function getReligionAssoc()
+	{
+		$sql = "SELECT religionID, religion
+				FROM user_religion
+				ORDER BY religion ASC";
+		return Core::getDropdownAssoc($sql);
+	}
+	
+	function getCasteAssoc($religionID = 0)
+	{
+		$whereCond = "";
+		if($religionID > 0)
+		{
+			$whereCond = " WHERE religionID = '$religionID'";
+		}
+		$sql = "SELECT casteID, caste
+				FROM user_caste	
+				$whereCond
+				ORDER BY caste ASC";
+		return Core::getDropdownAssoc($sql);
+	}
+	
+	function getGothramAssoc($religionID = 0)
+	{
+		$whereCond = "";
+		if($religionID > 0)
+		{
+			$whereCond = " WHERE religionID = '$religionID'";
+		}
+		$sql = "SELECT gothramID, gothram
+				FROM user_gothram
+				$whereCond
+				ORDER BY gothram ASC";
 		return Core::getDropdownAssoc($sql);
 	}
 }

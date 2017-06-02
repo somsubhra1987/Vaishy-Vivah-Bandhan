@@ -5,14 +5,12 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Religion */
 
-$this->title = 'Update Religion: ' . $model->religionID;
+$this->title = 'Update Religion: ' . $model->religion;
 $this->params['breadcrumbs'][] = ['label' => 'Religions', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->religionID, 'url' => ['view', 'id' => $model->religionID]];
+$this->params['breadcrumbs'][] = ['label' => $model->religion];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="religion-update">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,

@@ -30,7 +30,7 @@ class Gothram extends \yii\db\ActiveRecord
             [['religionID', 'gothram'], 'required'],
             [['religionID'], 'integer'],
             [['gothram'], 'string', 'max' => 100],
-            [['religionID', 'gothram'], 'unique', 'targetAttribute' => ['religionID', 'gothram'], 'message' => 'The combination of Religion ID and Gothram has already been taken.'],
+            [['religionID', 'gothram'], 'unique', 'targetAttribute' => ['religionID', 'gothram'], 'message' => 'The combination of Religion and Gothram has already been taken.'],
         ];
     }
 
@@ -41,7 +41,7 @@ class Gothram extends \yii\db\ActiveRecord
     {
         return [
             'gothramID' => 'Gothram ID',
-            'religionID' => 'Religion ID',
+            'religionID' => 'Religion',
             'gothram' => 'Gothram',
         ];
     }

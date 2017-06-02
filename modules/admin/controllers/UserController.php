@@ -8,27 +8,13 @@ use app\modules\admin\models\UserMasterSearch;
 use app\modules\admin\ControllerAdmin;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\lib\CustomFunctions;
 
 /**
  * UserController implements the CRUD actions for UserMaster model.
  */
 class UserController extends ControllerAdmin
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Lists all UserMaster models.
      * @return mixed
@@ -92,6 +78,12 @@ class UserController extends ControllerAdmin
             ]);
         }
     }
+	
+	public function actionStateagainstcountry($countryID)
+	{
+		$stateData = CustomFunctions::getStateAssoc($countryID);
+		return json_encode($stateData);
+	}
 
     /**
      * Deletes an existing UserMaster model.

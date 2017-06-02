@@ -1,41 +1,25 @@
 <?php
 
-namespace app\modules\admin\models;
+namespace app\modules\admin\controllers;
 
 use Yii;
-use app\modules\admin\models\UserMaster;
-use app\modules\admin\models\UserMasterSearch;
-use app\modules\admin\Controller;
+use app\modules\admin\models\Gothram;
+use app\modules\admin\models\GothramSearch;
+use app\modules\admin\ControllerAdmin;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
- * UserController implements the CRUD actions for UserMaster model.
+ * GothramController implements the CRUD actions for Gothram model.
  */
-class UserController extends Controller
+class GothramController extends ControllerAdmin
 {
     /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
-    /**
-     * Lists all UserMaster models.
+     * Lists all Gothram models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new UserMasterSearch();
+        $searchModel = new GothramSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +29,7 @@ class UserController extends Controller
     }
 
     /**
-     * Displays a single UserMaster model.
+     * Displays a single Gothram model.
      * @param string $id
      * @return mixed
      */
@@ -57,16 +41,16 @@ class UserController extends Controller
     }
 
     /**
-     * Creates a new UserMaster model.
+     * Creates a new Gothram model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new UserMaster();
+        $model = new Gothram();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->userID]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -75,7 +59,7 @@ class UserController extends Controller
     }
 
     /**
-     * Updates an existing UserMaster model.
+     * Updates an existing Gothram model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
@@ -85,7 +69,7 @@ class UserController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->userID]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -94,7 +78,7 @@ class UserController extends Controller
     }
 
     /**
-     * Deletes an existing UserMaster model.
+     * Deletes an existing Gothram model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
@@ -107,15 +91,15 @@ class UserController extends Controller
     }
 
     /**
-     * Finds the UserMaster model based on its primary key value.
+     * Finds the Gothram model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return UserMaster the loaded model
+     * @return Gothram the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = UserMaster::findOne($id)) !== null) {
+        if (($model = Gothram::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

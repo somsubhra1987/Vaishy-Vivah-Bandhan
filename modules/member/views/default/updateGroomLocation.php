@@ -7,7 +7,7 @@ use app\lib\CustomFunctions;
 /* @var $model app\modules\member\models\AppUser */
 /* @var $form yii\widgets\ActiveForm */
 $this->title = "Update Groom location";
-$stateUrl = Yii::$app->getUrlManager()->createUrl(['member/default/stateagainstcountry'])
+$stateUrl = Yii::$app->getUrlManager()->createUrl(['member/default/stateagainstcountry']);
 ?>
 <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -20,8 +20,8 @@ $stateUrl = Yii::$app->getUrlManager()->createUrl(['member/default/stateagainstc
         <div class="mandate-asset-create">
             <div class="modal-body">
                 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-                <?= $form->field($model, 'country')->dropDownList(Core::getCountryAssoc(),['prompt' => 'Select']) ?>
-                <?= $form->field($model, 'state')->dropDownList(CustomFunctions::getStateAssoc($model->country), ['prompt' => 'Select']) ?>
+                <?= $form->field($model, 'country')->dropDownList(Core::getCountryAssoc(),['prompt' => '--Select--', 'onchange' => 'getState(this.value);']) ?>
+                <?= $form->field($model, 'state')->dropDownList(CustomFunctions::getStateAssoc($model->country), ['prompt' => '--Select--']) ?>
                 <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
                 <div class="form-group">
                     <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
@@ -42,7 +42,7 @@ $stateUrl = Yii::$app->getUrlManager()->createUrl(['member/default/stateagainstc
             url:'<?php echo $stateUrl; ?>',
             data:{countryID:countryID},
             beforeSend:function(){
-                $("#usermaster-state").html('<option value="">---</options>');
+                $("#usermaster-state").html('<option value="">--Select--</options>');
             },
             success:function(response) {
                 $.each(response, function(i, value) {

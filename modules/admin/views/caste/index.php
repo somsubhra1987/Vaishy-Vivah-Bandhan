@@ -3,15 +3,16 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use app\lib\CustomHtml;
+use app\lib\CustomFunctions;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\admin\models\ReligionSearch */
+/* @var $searchModel app\modules\admin\models\CasteSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Religions';
+$this->title = 'Castes';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="religion-index">
+<div class="caste-index">
 
     <?=CustomHtml::getAddNewButton()?>
     <?= GridView::widget([
@@ -20,7 +21,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             CustomHtml::getEditActionIcon(),
 
-            'religion',
+			[
+				'attribute' => 'religionID',
+				'value' => function($data) {
+					return CustomFunctions::getReligionAssoc()[$data->religionID];
+				},
+			],
+            'caste',
 
             CustomHtml::getDeleteActionIcon(),
         ],

@@ -30,7 +30,7 @@ class Caste extends \yii\db\ActiveRecord
             [['religionID', 'caste'], 'required'],
             [['religionID'], 'integer'],
             [['caste'], 'string', 'max' => 100],
-            [['religionID', 'caste'], 'unique', 'targetAttribute' => ['religionID', 'caste'], 'message' => 'The combination of Religion ID and Caste has already been taken.'],
+            [['religionID', 'caste'], 'unique', 'targetAttribute' => ['religionID', 'caste'], 'message' => 'The combination of Religion and Caste has already been taken.'],
         ];
     }
 
@@ -41,7 +41,7 @@ class Caste extends \yii\db\ActiveRecord
     {
         return [
             'casteID' => 'Caste ID',
-            'religionID' => 'Religion ID',
+            'religionID' => 'Religion',
             'caste' => 'Caste',
         ];
     }

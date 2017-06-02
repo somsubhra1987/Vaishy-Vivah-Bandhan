@@ -2,11 +2,13 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\lib\Core;
+use app\lib\CustomFunctions;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\UserMaster */
 
-$this->title = $model->userID;
+$this->title = $model->firstName;
 $this->params['breadcrumbs'][] = ['label' => 'User Masters', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['backUrl'] = Yii::$app->urlManager->createUrl(['admin/user']);
@@ -27,19 +29,34 @@ $this->params['backUrl'] = Yii::$app->urlManager->createUrl(['admin/user']);
             'userPassword',
             'phoneNo',
             'address:ntext',
-            'country',
-            'state',
+            [
+				'attribute' => 'country',
+				'value' => Core::getCountryAssoc()[$model->country],
+			],
+            [
+				'attribute' => 'state',
+				'value' => CustomFunctions::getStateAssoc($model->country)[$model->state],
+			],
             'city',
             'subject',
             'personalInfo:ntext',
             'aboutFamily:ntext',
             'partnerPreference:ntext',
-            'profileCreatedFor',
-            'bodyType',
+			[
+				'attribute' => 'profileCreatedFor',
+				'value' => CustomFunctions::getProfileCreatedForAssoc()[$model->profileCreatedFor],
+			],
+			[
+				'attribute' => 'bodyType',
+				'value' => CustomFunctions::getBodyTypeAssoc()[$model->bodyType],
+			],
             'height',
             'age',
             'physicalStatus',
-            'isActive',
+            [
+				'attribute' => 'isActive',
+				'value' => ($model->isActive) ? 'Yes' : 'No',
+			],
         ],
     ]) ?>
 
