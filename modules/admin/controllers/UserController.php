@@ -84,6 +84,18 @@ class UserController extends ControllerAdmin
 		$stateData = CustomFunctions::getStateAssoc($countryID);
 		return json_encode($stateData);
 	}
+	
+	public function actionGothramagainstreligion($religionID)
+	{
+		$gothramData = CustomFunctions::getGothramAssoc($religionID);
+		return json_encode($gothramData);
+	}
+	
+	public function actionCasteagainstreligion($religionID)
+	{
+		$casteData = CustomFunctions::getCasteAssoc($religionID);
+		return json_encode($casteData);
+	}
 
     /**
      * Deletes an existing UserMaster model.

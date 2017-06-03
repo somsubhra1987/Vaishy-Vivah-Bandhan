@@ -49,9 +49,9 @@ class UserMaster extends \yii\db\ActiveRecord
     {
         return [
             [['firstName', 'gender', 'dob', 'email', 'userPassword'], 'required'],
-            [['dob', 'age', 'lastName', 'height', 'education', 'profileCreatedFor', 'employmentSector', 'occupation', 'createDate'], 'safe'],
+            [['dob', 'age', 'lastName', 'height', 'education', 'profileCreatedFor', 'employmentSector', 'occupation', 'createDate','annualIncome', 'religionID', 'gothramID', 'casteID'], 'safe'],
             [['address', 'personalInfo', 'aboutFamily', 'partnerPreference'], 'string'],
-            [['height'], 'number'],
+            [['height', 'annualIncome'], 'number'],
             [['isActive'], 'integer'],
             [['isActive', 'height', 'age'], 'default', 'value'=>0],
             [['profileID', 'gender', 'profileCreatedFor'], 'string', 'max' => 20],
@@ -94,6 +94,10 @@ class UserMaster extends \yii\db\ActiveRecord
             'height' => 'Height',
             'age' => 'Age',
             'physicalStatus' => 'Physical Status',
+			'religionID' => 'Religion',
+			'gothramID' => 'Gothram',
+			'casteID' => 'Caste',
+			'annualIncome' => 'Annual Income (In Lakh)',
             'isActive' => 'Is Active',
         ];
     }

@@ -11,10 +11,17 @@ use app\lib\CustomFunctions;
 /* @var $form yii\widgets\ActiveForm */
 
 $stateUrl = Yii::$app->getUrlManager()->createUrl(['admin/user/stateagainstcountry']);
+$gothramUrl = Yii::$app->getUrlManager()->createUrl(['admin/user/gothramagainstreligion']);
+$casteUrl = Yii::$app->getUrlManager()->createUrl(['admin/user/casteagainstreligion']);
+
 $stateData = array();
+$gothramData = array();
+$casteData = array();
 if(!$model->isNewRecord)
 {
 	$stateData = CustomFunctions::getStateAssoc($model->country);
+	$gothramData = CustomFunctions::getGothramAssoc($model->religionID);
+	$casteData = CustomFunctions::getCasteAssoc($model->religionID);
 }
 ?>
 
@@ -65,6 +72,14 @@ if(!$model->isNewRecord)
     <?= $form->field($model, 'height')->dropDownList(Core::getHeightList(), ['prompt' => '--Select--'])->label('Height (ft.)')?>
 
     <?= $form->field($model, 'physicalStatus')->dropDownList(['normal'=>'Normal', 'strong'=>'Strong'], ['prompt' => '--Select--']);?>
+    
+    <?= $form->field($model, 'annualIncome')->textInput() ?>
+    
+    <?= $form->field($model, 'religionID')->dropDownList(CustomFunctions::getReligionAssoc(), ['prompt' => '--Select--', 'onchange' => 'getGothram(this.value); getCaste(this.value);']);?>
+    
+    <?= $form->field($model, 'gothramID')->dropDownList($gothramData, ['prompt' => '--Select--']);?>
+    
+    <?= $form->field($model, 'casteID')->dropDownList($casteData, ['prompt' => '--Select--']);?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
@@ -88,6 +103,42 @@ if(!$model->isNewRecord)
             success:function(response) {
                 $.each(response, function(i, value) {
                     $('#usermaster-state').append($('<option>').text(value).attr('value', i));
+                });
+            }
+        });
+    }
+
+    function getGothram(religionID)
+    {
+        $.ajax({
+            method:'GET',
+            dataType: 'json',
+            url:'<?php echo $gothramUrl; ?>',
+            data:{religionID:religionID},
+            beforeSend:function(){
+                $("#usermaster-gothramid").html('<option value="">--Select--</options>');
+            },
+            success:function(response) {
+                $.each(response, function(i, value) {
+                    $('#usermaster-gothramid').append($('<option>').text(value).attr('value', i));
+                });
+            }
+        });
+    }
+	
+	function getCaste(religionID)
+    {
+        $.ajax({
+            method:'GET',
+            dataType: 'json',
+            url:'<?php echo $casteUrl; ?>',
+            data:{religionID:religionID},
+            beforeSend:function(){
+                $("#usermaster-casteid").html('<option value="">--Select--</options>');
+            },
+            success:function(response) {
+                $.each(response, function(i, value) {
+                    $('#usermaster-casteid').append($('<option>').text(value).attr('value', i));
                 });
             }
         });
