@@ -42,6 +42,8 @@ if($model->dob == '0000-00-00'){
                 <?= $form->field($model, 'height')->dropDownList(Core::getHeightList(), ['prompt' => '--Select--'])->label('Height (ft.)')?>
 
                 <?= $form->field($model, 'physicalStatus')->dropDownList(['normal'=>'Normal', 'strong'=>'Strong'], ['prompt' => '--Select--'])->label('Physical Status')?>
+                
+                <?= $form->field($model, 'annualIncome')->textInput() ?>
 
                 <div class="form-group">
                     <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

@@ -36,12 +36,13 @@ class UserMaster extends \yii\db\ActiveRecord
             [['phoneNo','address','city', 'dob'], 'required', 'on'=>'registration'],
             [['isActive'], 'integer'],
             [['firstName', 'lastName'], 'string', 'max' => 100],
-            [['userPassword','phoneNo','address','country', 'state', 'city', 'dob', 'subject', 'gender', 'personalInfo', 'aboutFamily','partnerPreference','profileID', 'profileCreatedFor', 'bodyType', 'height','age', 'physicalStatus'],'safe'],
+            [['userPassword','phoneNo','address','country', 'state', 'city', 'dob', 'subject', 'gender', 'personalInfo', 'aboutFamily','partnerPreference','profileID', 'profileCreatedFor', 'bodyType', 'height','age', 'physicalStatus', 'religionID', 'gothramID', 'casteID', 'annualIncome'],'safe'],
             [['email'], 'string', 'max' => 155],
             [['isActive'], 'default', 'value'=>'1'],
             [['lastName'], 'default', 'value'=> ''],            
             [['fileName'], 'file', 'skipOnEmpty' => true, 'checkExtensionByMimeType'=>false],
             [['email'], 'unique'],
+			[['annualIncome'], 'number'],
         ];
     }
 
@@ -61,6 +62,10 @@ class UserMaster extends \yii\db\ActiveRecord
             'phoneNo' => 'Phone Number',
             'address' => 'Address',
             'dob' => 'Date of birth',
+			'religionID' => 'Religion',
+			'gothramID' => 'Gothram',
+			'casteID' => 'Caste',
+			'annualIncome' => 'Annual Income (In Lakh)',
         ];
     }
     

@@ -73,28 +73,18 @@ class CustomFunctions
 	
 	function getCasteAssoc($religionID = 0)
 	{
-		$whereCond = "";
-		if($religionID > 0)
-		{
-			$whereCond = " WHERE religionID = '$religionID'";
-		}
 		$sql = "SELECT casteID, caste
 				FROM user_caste	
-				$whereCond
+				WHERE religionID = '$religionID'
 				ORDER BY caste ASC";
 		return Core::getDropdownAssoc($sql);
 	}
 	
 	function getGothramAssoc($religionID = 0)
 	{
-		$whereCond = "";
-		if($religionID > 0)
-		{
-			$whereCond = " WHERE religionID = '$religionID'";
-		}
 		$sql = "SELECT gothramID, gothram
 				FROM user_gothram
-				$whereCond
+				WHERE religionID = '$religionID'
 				ORDER BY gothram ASC";
 		return Core::getDropdownAssoc($sql);
 	}

@@ -254,12 +254,12 @@ $stateUrl = Yii::$app->getUrlManager()->createUrl(['member/default/stateagainstc
                       <td  align="left" valign="top"  class="gray-text">
                         <p> <strong> Age:</strong><?php echo Core::getAgeByDate($searchList->dob)?>  Yrs </p>
                         <p> <strong> Height:</strong> <?php echo $searchList->height?> ft.</p>
-                        <p> <strong>  Religion:</strong> Hindu</p>
-                        <p> <strong> Caste:</strong> Caste no bar (Caste No Bar)</p>
+                        <p> <strong>  Religion:</strong> <?= CustomFunctions::getReligionAssoc()[$searchList->religionID]; ?></p>
+                        <p> <strong> Caste:</strong> <?= CustomFunctions::getCasteAssoc($searchList->religionID)[$searchList->casteID]; ?></p>
                         <p> <strong>  Location:</strong> <?=$searchList->address?></p>
                         <p> <strong> Education :</strong> <?= CustomFunctions::getEducationAssoc()[$searchList->education]; ?></p>
                         <p> <strong> Profession:</strong> <?= CustomFunctions::getOccupationAssoc()[$searchList->occupation]; ?></p>
-                        <p>  <strong>Annual Income:</strong> 1.20 lakhs</p>
+                        <p>  <strong>Annual Income:</strong> <?php if($searchList->annualIncome == 0){ echo 'Not Entered'; }else{ echo $searchList->annualIncome.' lakhs'; } ?></p>
                         <a href="#" class="blue-text"> View Full Profile</a> 
                       </td>                  
                     </tr>

@@ -103,6 +103,16 @@ class DefaultController extends Controller
             'model'=>$model
         ]); 
     }
+	
+	public function actionReligioninformationupdate(){
+        $model = $this->findModel(Core::getLoggedUserID());
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index']);
+        }
+        return $this->renderAjax('updateReligionInformation',[
+            'model'=>$model
+        ]); 
+    }
 
     public function actionMatches()
     {
@@ -116,6 +126,18 @@ class DefaultController extends Controller
 	{
 		$stateData = CustomFunctions::getStateAssoc($countryID);
 		return json_encode($stateData);
+	}
+	
+	public function actionGothramagainstreligion($religionID)
+	{
+		$gothramData = CustomFunctions::getGothramAssoc($religionID);
+		return json_encode($gothramData);
+	}
+	
+	public function actionCasteagainstreligion($religionID)
+	{
+		$casteData = CustomFunctions::getCasteAssoc($religionID);
+		return json_encode($casteData);
 	}
 
     protected function findModel($id)
