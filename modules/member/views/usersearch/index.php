@@ -4,8 +4,10 @@ use app\lib\Core;
 use app\lib\CustomFunctions;
 use yii\widgets\ActiveForm;
 use yii\widgets\LinkPager;
+use app\modules\member\models\UserInterest;
 
 $stateUrl = Yii::$app->getUrlManager()->createUrl(['member/default/stateagainstcountry']);
+$sendInterestUrl = Yii::$app->getUrlManager()->createUrl(['member/default/sendinterest']);
 ?>
 <!-- Start Feature -->
 <section id="feature">
@@ -216,7 +218,8 @@ $stateUrl = Yii::$app->getUrlManager()->createUrl(['member/default/stateagainstc
 
                 <div class="col-lg-12 no-padding">
                 <?php
-                foreach ($dataProvider as $searchList) {                
+                foreach ($dataProvider as $searchList) {   
+				      $interestCount = UserInterest::find()->where(['sendByUserID' => Core::getLoggedUser()->id, 'sendToUserID' => $searchList->userID])->count();
                 ?>
                   <table width="100%" border="0" cellspacing="0" cellpadding="0" class="match">
                     <tr>
@@ -267,7 +270,7 @@ $stateUrl = Yii::$app->getUrlManager()->createUrl(['member/default/stateagainstc
                       <td colspan="4" align="right">
                         <button type="button" class="btn btn-primary">Send Mail</button>
                         <button type="button" class="btn btn-warning">Shortlist</button>
-                        <button type="button" class="btn btn-success"> <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Send Interest</button>
+                        <button type="button" class="btn btn-success" <?php if($interestCount > 0){ ?> disabled="disabled" <?php }else{ ?> onclick="sendInterest(this, <?php echo $searchList->userID; ?>);" <?php } ?>> <span class="glyphicon glyphicon-heart" aria-hidden="true"></span><?php if($interestCount > 0){ echo ' Interest Sent'; }else{ echo ' Send Interest'; } ?></button>
                       </td>                  
                     </tr>
                   </table>
@@ -353,6 +356,23 @@ $stateUrl = Yii::$app->getUrlManager()->createUrl(['member/default/stateagainstc
 				$.each(response, function(i, value) {
 					$('#usermastersearch-state').append($('<option>').text(value).attr('value', i));
 				});
+			}
+		});
+	}
+	
+	function sendInterest(obj, sendToUserID)
+	{
+		$.ajax({
+			method:'GET',
+			url:'<?php echo $sendInterestUrl; ?>',
+			data:{sendToUserID:sendToUserID},
+			beforeSend:function(){
+				$(obj).append('<div class="fa fa-spinner fa-spin modal_loader" style="margin-left:4px;"></div>');
+			},
+			success:function(response) {
+				$(".modal_loader").remove();
+				$(obj).attr('disabled', 'disabled');
+				$(obj).html('<span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Interest Sent');
 			}
 		});
 	}

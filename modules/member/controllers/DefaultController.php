@@ -7,6 +7,7 @@ use app\models\UserMaster;
 use app\lib\Core;
 use app\lib\CustomFunctions;
 use yii\web\UploadedFile;
+use app\modules\member\models\UserInterest;
 /**
  * Default controller for the `member` module
  */
@@ -138,6 +139,20 @@ class DefaultController extends Controller
 	{
 		$casteData = CustomFunctions::getCasteAssoc($religionID);
 		return json_encode($casteData);
+	}
+	
+	public function actionSendinterest($sendToUserID)
+	{
+		$userDetail = Core::getLoggedUser();
+		$userInterestModel = new UserInterest();
+		$userInterestModel->sendByUserID = $userDetail->id;
+		$userInterestModel->sendToUserID = $sendToUserID;
+		//$userInterestModel->messageSent = '';
+		$userInterestModel->viewStatus = 0;
+		$userInterestModel->acceptedRejectedStatus = 0;
+		$userInterestModel->save();
+		
+		return true;
 	}
 
     protected function findModel($id)
