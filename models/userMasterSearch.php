@@ -140,7 +140,7 @@ class userMasterSearch extends userMaster
         $query = UserMaster::find()
 					->select("user_master.*")
 					->innerJoin("user_shortlist")
-					->where("user_master.userID = user_shortlist.shortlistedUserID")
+					->where("user_master.userID = user_shortlist.shortlistedByUserID")
 					->andWhere(['user_shortlist.shortlistedUserID' => Core::getLoggedUser()->id]);
         $this->load($params);
         $dataProvider = new ActiveDataProvider([
