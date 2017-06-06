@@ -8,6 +8,7 @@ use app\lib\Core;
 use app\lib\CustomFunctions;
 use yii\web\UploadedFile;
 use app\modules\member\models\UserInterest;
+use app\modules\member\models\UserShortlist;
 /**
  * Default controller for the `member` module
  */
@@ -151,6 +152,26 @@ class DefaultController extends Controller
 		$userInterestModel->viewStatus = 0;
 		$userInterestModel->acceptedRejectedStatus = 0;
 		$userInterestModel->save();
+		
+		return true;
+	}
+	
+	public function actionShortlist($shortlistedUserID)
+	{
+		$userDetail = Core::getLoggedUser();
+		$shortlistedStatus = UserShortlist::find()->where(['shortlistedByUserID' => $userDetail->id, 'shortlistedUserID' => $shortlistedUserID])->count();
+		if($shortlistedStatus == 0)
+		{
+			$userShortlistModel = new UserShortlist();
+			$userShortlistModel->shortlistedByUserID = $userDetail->id;
+			$userShortlistModel->shortlistedUserID = $shortlistedUserID;
+			$userShortlistModel->status = 0;
+			$userShortlistModel->save();
+		}
+		else
+		{
+			return false;
+		}
 		
 		return true;
 	}

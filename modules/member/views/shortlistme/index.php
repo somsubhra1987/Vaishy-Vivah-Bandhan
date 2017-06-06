@@ -215,19 +215,18 @@ $shortlistUrl = Yii::$app->getUrlManager()->createUrl(['member/default/shortlist
         <!--Middle-->
 
               <div class="col-md-6 white-bg">
-                <h3> Matches </h3>
+                <h3> Users shortlist me </h3>
                 <div class="line"></div>
 
                 <div class="col-lg-12 no-padding">
                 <?php
-                foreach ($dataProvider as $searchList) {   
+                foreach ($dataProvider as $searchList) {
 				      $interestCount = UserInterest::find()->where(['sendByUserID' => Core::getLoggedUser()->id, 'sendToUserID' => $searchList->userID])->orWhere(['sendToUserID' => Core::getLoggedUser()->id, 'sendByUserID' => $searchList->userID])->count();
 					  
 					  $shortlistedStatus = UserShortlist::find()->where(['shortlistedByUserID' => Core::getLoggedUser()->id, 'shortlistedUserID' => $searchList->userID])->count();
                 ?>
                   <table width="100%" border="0" cellspacing="0" cellpadding="0" class="match">
                     <tr>
-                      <td align="left" valign="top"> <input type="checkbox"> </td>
                       <td  align="left" valign="top"> <h2><?=$searchList->firstName?></h2>
                         <p class="gray-text">
                             <?=$searchList->profileID?>
@@ -238,15 +237,12 @@ $shortlistUrl = Yii::$app->getUrlManager()->createUrl(['member/default/shortlist
                              <?php
                             }
                             ?>
-                        </p>
-                      </td>
+                        </p>                      </td>
                       <td  align="left" valign="top"  class="gray-text">
                         <p>
                         <a href="#" title="View Mobile  Number"> <img src="<?=Yii::$app->getUrlManager()->getBaseUrl()?>/themes/frontend/vivahBandhan/images/mobile.png" title="View Mobile  Number"></a>
-                        <a href="#" title="Requaedt horoscope "> <img src="<?=Yii::$app->getUrlManager()->getBaseUrl()?>/themes/frontend/vivahBandhan/images/horoscope.png" title=" Requaedt horoscope "></a>
-                        </p>
-                        Last Viewed : 02-Sep-2016
-                      </td>                  
+                        <a href="#" title="Requaedt horoscope "> <img src="<?=Yii::$app->getUrlManager()->getBaseUrl()?>/themes/frontend/vivahBandhan/images/horoscope.png" title=" Requaedt horoscope "></a>                        </p>
+                        Last Viewed : 02-Sep-2016                      </td>                  
                     </tr>
                     <?php                    
                     $profilePath = Core::getFilePath($searchList->userID, 'user_master');
@@ -255,9 +251,7 @@ $shortlistUrl = Yii::$app->getUrlManager()->createUrl(['member/default/shortlist
                     }
                     ?>
                     <tr>
-                      <td align="left" valign="top">&nbsp;</td>
-                      <td  align="left" valign="top"> <a href="#"><img src="<?=$profilePath?>" width="100%"></a>
-                      </td>
+                      <td  align="left" valign="top"> <a href="#"><img src="<?=$profilePath?>" width="100%"></a>                      </td>
                       <td  align="left" valign="top"  class="gray-text">
                         <p> <strong> Age:</strong><?php echo Core::getAgeByDate($searchList->dob)?>  Yrs </p>
                         <p> <strong> Height:</strong> <?php echo $searchList->height?> ft.</p>
@@ -267,15 +261,13 @@ $shortlistUrl = Yii::$app->getUrlManager()->createUrl(['member/default/shortlist
                         <p> <strong> Education :</strong> <?= CustomFunctions::getEducationAssoc()[$searchList->education]; ?></p>
                         <p> <strong> Profession:</strong> <?= CustomFunctions::getOccupationAssoc()[$searchList->occupation]; ?></p>
                         <p>  <strong>Annual Income:</strong> <?php if($searchList->annualIncome == 0){ echo 'Not Entered'; }else{ echo $searchList->annualIncome.' lakhs'; } ?></p>
-                        <a href="#" class="blue-text"> View Full Profile</a> 
-                      </td>                  
+                        <a href="#" class="blue-text"> View Full Profile</a>                      </td>                  
                     </tr>
                     <tr>
-                      <td colspan="4" align="right">
+                      <td colspan="3" align="right">
                         <button type="button" class="btn btn-primary">Send Mail</button>
                         <button type="button" class="btn btn-warning" <?php if($shortlistedStatus > 0){ ?> disabled="disabled" <?php }else{ ?> onclick="shortlistUser(this, <?php echo $searchList->userID; ?>);" <?php } ?>><?php if($shortlistedStatus > 0){ echo 'Shortlisted'; }else{ echo 'Shortlist'; } ?></button>
-                        <button type="button" class="btn btn-success" <?php if($interestCount > 0){ ?> disabled="disabled" <?php }else{ ?> onclick="sendInterest(this, <?php echo $searchList->userID; ?>);" <?php } ?>> <span class="glyphicon glyphicon-heart" aria-hidden="true"></span><?php if($interestCount > 0){ echo ' Interest Sent'; }else{ echo ' Send Interest'; } ?></button>
-                      </td>                  
+                        <button type="button" class="btn btn-success" <?php if($interestCount > 0){ ?> disabled="disabled" <?php }else{ ?> onclick="sendInterest(this, <?php echo $searchList->userID; ?>);" <?php } ?>> <span class="glyphicon glyphicon-heart" aria-hidden="true"></span><?php if($interestCount > 0){ echo ' Interest Sent'; }else{ echo ' Send Interest'; } ?></button>                      </td>                  
                     </tr>
                   </table>
                   <?php

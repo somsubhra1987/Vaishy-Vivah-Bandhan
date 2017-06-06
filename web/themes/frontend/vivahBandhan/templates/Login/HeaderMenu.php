@@ -30,7 +30,7 @@ use app\lib\Core;
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="<?=Yii::$app->homeUrl?>member">My Profile</a></li>    
                     <li><a href="#">Who View My Profile</a></li>  
-                    <li><a href="#">Who Shortlist Me  </a></li>  
+                    <li><a href="<?=Yii::$app->urlManager->createUrl(['member/shortlistme'])?>">Who Shortlist Me  </a></li>  
                     <li><a href="#">Profile I have ignore <strong class="red-text"> (8)</strong>  </a></li> 
                 </ul>
             </li> 

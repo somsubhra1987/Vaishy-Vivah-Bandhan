@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * UsersearchController implements the CRUD actions for userMaster model.
  */
-class UsersearchController extends Controller
+class ShortlistmeController extends Controller
 {
     /**
      * Lists all userMaster models.
@@ -21,7 +21,7 @@ class UsersearchController extends Controller
     public function actionIndex()
     {
         $searchModel = new userMasterSearch();
-        $dataAssoc = $searchModel->searchmatche(Yii::$app->request->queryParams);
+        $dataAssoc = $searchModel->searchShortlistedUser(Yii::$app->request->queryParams);
         $dataProvider = $dataAssoc['dataProvider'];
         $pagination = $dataAssoc['pagination'];
         return $this->render('index', [

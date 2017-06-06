@@ -134,4 +134,51 @@ class userMasterSearch extends userMaster
        // die($rwquery);
         return array('dataProvider'=>$dataProvider, 'pagination'=>$pagination);
     }
+	
+	public function searchShortlistedUser($params){
+		       
+        $query = UserMaster::find()
+					->select("user_master.*")
+					->innerJoin("user_shortlist")
+					->where("user_master.userID = user_shortlist.shortlistedUserID")
+					->andWhere(['user_shortlist.shortlistedUserID' => Core::getLoggedUser()->id]);
+        $this->load($params);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        if($this->age){
+            $this->dob = Core::prepareDate($this->age, true);            
+        }
+        if($this->age2){
+            $this->dob2 = Core::prepareDate($this->age2);            
+        }
+
+        //$query = UserMaster::find()->where('1');
+
+        if($this->age!= '' && $this->age2 != ''){
+            $query->andWhere(['between','dob', $this->dob2, $this->dob]);
+        }
+
+        if($this->height >0 && $this->height2 >0){
+            $query->andWhere(['between','height', $this->height, $this->height2]);
+        }
+
+        if($this->country){
+            $query->andWhere(['country'=>$this->country]);
+        }
+        $pagination = new Pagination([
+            'defaultPageSize'=>5,
+            'totalCount'=>$query->count(),
+            ]);
+
+        $dataProvider = $query->offset($pagination->offset)
+                        ->limit($pagination->limit)
+                        ->all();
+        //$dataList = $query->all();
+
+        //$rwquery = $query->createCommand()->getRawSql();
+       // die($rwquery);
+        return array('dataProvider'=>$dataProvider, 'pagination'=>$pagination);
+    }
 }
