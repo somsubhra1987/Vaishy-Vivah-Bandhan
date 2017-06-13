@@ -4,14 +4,20 @@ $('#register-button').on('click', function () {
         url    : form.attr('action'),
         type   : 'post',
         data   : form.serialize(), 
-        dataType: 'json',           
+        dataType: 'json',
+		beforeSend: function(){
+			$('#register-button').attr('disabled', 'disabled');
+			$('#register-button').html('Please wait...');
+		},
         success: function (response) 
         { 
-            $('#responseRegisterMessage').html(response.message);              
+            $('#responseRegisterMessage').html(response.message); 
+			$('#register-button').removeAttr('disabled');
+			$('#register-button').html('Register');
             console.log(response);
         },
-        error  : function () 
-        {              
+        error  : function (e) 
+        {
             console.log('internal server error');
         }
     });

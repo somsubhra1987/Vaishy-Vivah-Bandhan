@@ -36,7 +36,7 @@ class UserMaster extends \yii\db\ActiveRecord
             [['phoneNo','address','city', 'dob'], 'required', 'on'=>'registration'],
             [['isActive'], 'integer'],
             [['firstName', 'lastName'], 'string', 'max' => 100],
-            [['userPassword','phoneNo','address','country', 'state', 'city', 'dob', 'subject', 'gender', 'personalInfo', 'aboutFamily','partnerPreference','profileID', 'profileCreatedFor', 'bodyType', 'height','age', 'physicalStatus', 'religionID', 'gothramID', 'casteID', 'annualIncome'],'safe'],
+            [['userPassword','phoneNo','address','country', 'state', 'city', 'dob', 'subject', 'gender', 'personalInfo', 'aboutFamily','partnerPreference','profileID', 'profileCreatedFor', 'bodyType', 'height','age', 'physicalStatus', 'religionID', 'gothramID', 'casteID', 'annualIncome', 'education', 'employmentSector', 'occupation'],'safe'],
             [['email'], 'string', 'max' => 155],
             [['isActive'], 'default', 'value'=>'1'],
             [['lastName'], 'default', 'value'=> ''],            

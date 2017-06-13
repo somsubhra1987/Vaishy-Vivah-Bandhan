@@ -41,6 +41,8 @@ $stateUrl = Yii::$app->getUrlManager()->createUrl(['site/stateagainstcountry']);
                     </div>
                     <?= Html::submitButton('Login', ['class' => 'comment-btn', 'id'=>'login-button']) ?>
                 <?php ActiveForm::end(); ?>
+                
+                <div id="responseRegisterMessage" style="margin-top:30px;"></div>
   </div>  
   
   
@@ -56,7 +58,7 @@ $stateUrl = Yii::$app->getUrlManager()->createUrl(['site/stateagainstcountry']);
                                     ]
                         ])
                         ?>
-                    <div id="responseRegisterMessage"></div>
+                    
                     <div class="form-group">                        
                       <input type="text" class="form-control" placeholder="Your Name" name="UserMaster[firstName]">
                     </div>

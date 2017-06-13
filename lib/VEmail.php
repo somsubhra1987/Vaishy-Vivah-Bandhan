@@ -36,7 +36,7 @@ class VEmail extends Core
 		$senderName = "VaishyVivahBandhan";
 		$senderEmail = "noreply@vaishyvivahbandhan.com";
 		$toEmail = $model->email;
-		$cc = 'chinmaydas98@gmail.com';
+		$cc = '';
 		$bcc = '';				
 		self::sendHtmlEmail($toEmail, $subject, $senderName, $senderEmail, $cc, $bcc, $content);
 	}

@@ -9,9 +9,11 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\UserMaster;
+use app\models\UserMessage;
 use yii\web\UploadedFile;
 use app\lib\Core;
 use app\lib\CustomFunctions;
+use app\lib\Sms;
 
 class SiteController extends Controller
 {
@@ -87,6 +89,19 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $response['success'] = 1; 
             $response['message'] = 'Profile successfully created and Password has been sent to your mail please check..';
+			$response['country'] = $model->country;
+			if($model->phoneNo != '' && strlen($model->phoneNo) == 10 && $model->country == '1')
+			{
+				$smsObj = new Sms();
+				$curlResponse = $smsObj->sendSms($model->phoneNo, 91, 'afterRegistration');
+				$curlResponseArr = json_decode($curlResponse, true);
+				
+				$smsModel = new UserMessage();
+				$smsModel->mobileNumber = $model->phoneNo;
+				$smsModel->messageBody = $curlResponseArr[1];
+				$smsModel->apiResponse = $curlResponseArr[0];
+				$smsModel->save();
+			}
             exit(json_encode($response));
         }
         else{

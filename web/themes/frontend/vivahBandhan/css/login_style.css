@@ -2143,14 +2143,18 @@ border-left: 1px solid #fff;
   background-color: #1d89e4;
   color: #fff;
   text-transform: uppercase;
-  font-size: 15px;
+  font-size: 15px !important;
   -webkit-transition: all 0.5s;
   -o-transition: all 0.5s;
-  transition: all 0.5s;border-radius:25px;
+  transition: all 0.5s;
+  border-radius:25px !important;
+  height:auto !important;
 }
 
 .comment-btn:hover{  
-  color: #666; background:#fff; border-radius:25px;
+  color: #666;
+  background:#fff;
+  border-radius:25px !important;
   border: 1px solid #ddd;
 }
 
