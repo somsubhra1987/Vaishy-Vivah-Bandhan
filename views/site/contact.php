@@ -1,6 +1,8 @@
 <?php
 use yii\helpers\Html;
 use app\lib\Core;
+use app\lib\CustomHtml;
+use yii\bootstrap\ActiveForm;
 
 $this->title = 'Contact Us';
 ?>
@@ -24,21 +26,26 @@ $this->title = 'Contact Us';
         <h1><em>Quick Contact</em></h1>
         <div class="top"></div>
         <div class="middle">
+          <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
           <p>Frist name
-            <input type="text" class="foam" placeholder="Enter your Frist name" />
+            <input type="text" name="ContactForm[firstName]" class="foam" required="required" placeholder="Enter your Frist name" />
           </p>
           <p>Last name
-            <input type="text" class="foam" placeholder="Enter your Last name" />
+            <input type="text" name="ContactForm[lastName]" class="foam" required="required" placeholder="Enter your Last name" />
           </p>
           <p>Email
-            <input type="text" class="foam" placeholder="Enter your Email" />
+            <input type="text" name="ContactForm[email]" class="foam" required="required" placeholder="Enter your Email" />
           </p>
           <p>Query
-            <textarea class="quary" placeholder="Query"></textarea>
+            <textarea name="ContactForm[query]" class="quary" required="required" placeholder="Query"></textarea>
           </p>
           <p>
-            <input type="button" class="submit" value="submit" />
+          	<?php echo Html::submitButton('submit', ['class' => 'submit']) ?>
+            
+            <?php echo CustomHtml::getFlashMsg(); ?>
           </p>
+            
+          <?php ActiveForm::end(); ?>
         </div>
         <div class="bottom"></div>
         <div class="last"> </div>

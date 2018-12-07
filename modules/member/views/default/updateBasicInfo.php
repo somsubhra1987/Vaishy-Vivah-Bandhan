@@ -27,7 +27,9 @@ if($model->dob == '0000-00-00'){
 
                 <?= $form->field($model, 'firstName')->textInput(['maxlength' => true]) ?>
                 
-                <?= $form->field($model, 'dob')->widget(DatePicker::classname(), ['dateFormat' => 'yyyy-MM-dd', 'options' => ['class' => 'form-control']]) ?>
+                <?= $form->field($model, 'gender')->dropDownList(['Male'=>'Male', 'Female'=>'Female'], ['prompt' => '--Select--']); ?>
+                
+                <?= $form->field($model, 'dob')->widget(DatePicker::classname(), ['dateFormat' => 'yyyy-MM-dd', 'options' => ['class' => 'form-control'], 'clientOptions' => ['minDate' => '-18y', 'changeYear' => true]]) ?>
 
                 <?= $form->field($model, 'profileCreatedFor')->dropDownList(CustomFunctions::getProfileCreatedForAssoc(), ['prompt'=>'--Select--'])?>
                                 

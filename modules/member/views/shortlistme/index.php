@@ -166,7 +166,9 @@ $shortlistUrl = Yii::$app->getUrlManager()->createUrl(['member/default/shortlist
                       <td colspan="3">
                         <select class="form-control" name="userMasterSearch[state]" id="usermastersearch-state">
                           <option value="">---</option>
-                          
+                          <?php if($searchModel->state){ foreach(Core::getStateAssoc($searchModel->country) as $key => $value){ ?>
+                          <option value="<?php echo $key; ?>" <?php if($searchModel->state == $key){ ?> selected="selected" <?php } ?>><?php echo $value; ?></option>
+                          <?php } } ?>
                         </select>
                       </td>
                     </tr>

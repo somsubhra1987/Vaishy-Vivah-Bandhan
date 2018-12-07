@@ -6,6 +6,7 @@ use app\modules\member\Controller;
 use app\models\UserMaster;
 use app\lib\Core;
 use app\lib\CustomFunctions;
+use app\lib\VEmail;
 use yii\web\UploadedFile;
 use app\modules\member\models\UserInterest;
 use app\modules\member\models\UserShortlist;
@@ -151,7 +152,10 @@ class DefaultController extends Controller
 		//$userInterestModel->messageSent = '';
 		$userInterestModel->viewStatus = 0;
 		$userInterestModel->acceptedRejectedStatus = 0;
-		$userInterestModel->save();
+		if($userInterestModel->save())
+		{
+			VEmail::sendInterestMail($userDetail->id, $sendToUserID);
+		}
 		
 		return true;
 	}
@@ -174,6 +178,38 @@ class DefaultController extends Controller
 		}
 		
 		return true;
+	}
+	
+	public function actionChangepassword($id)
+	{
+		$userModel = $this->findModel($id);
+		
+		if($userModel->load(Yii::$app->request->post()))
+        {
+			$userModel->scenario = 'reset_password';
+			
+			if($userModel->newPassword != $userModel->confirmPassword)
+			{
+				Yii::$app->session->setFlash('error', '<div class="text-red">Confirm Password Mismatch</div>');
+			}
+			else
+			{
+				$userModel->userPassword = $userModel->confirmPassword;
+				$userModel->isForgotPasswordKeyExpired = 1;
+				
+				if ($userModel->save()) {
+					Yii::$app->session->setFlash('error', '<div class="text-green">Password changed Successfully</div>');
+					return $this->redirect(['changepassword', 'id' => $id]);
+				}
+				else{
+					Yii::$app->session->setFlash('error', Core::createErrorlist($userModel->getErrors()));
+				}
+			}
+		}
+		
+		return $this->render('changepassword', [
+			'model' => $model,
+		]);
 	}
 
     protected function findModel($id)

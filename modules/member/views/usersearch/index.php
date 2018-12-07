@@ -166,7 +166,9 @@ $shortlistUrl = Yii::$app->getUrlManager()->createUrl(['member/default/shortlist
                       <td colspan="3">
                         <select class="form-control" name="userMasterSearch[state]" id="usermastersearch-state">
                           <option value="">---</option>
-                          
+                          <?php if($searchModel->state){ foreach(Core::getStateAssoc($searchModel->country) as $key => $value){ ?>
+                          <option value="<?php echo $key; ?>" <?php if($searchModel->state == $key){ ?> selected="selected" <?php } ?>><?php echo $value; ?></option>
+                          <?php } } ?>
                         </select>
                       </td>
                     </tr>
@@ -253,21 +255,22 @@ $shortlistUrl = Yii::$app->getUrlManager()->createUrl(['member/default/shortlist
                     if(!$profilePath){
                         $profilePath = Yii::$app->getUrlManager()->getBaseUrl().'/themes/frontend/vivahBandhan/images/user.png';
                     }
+					$viewProfileUrl = Yii::$app->getUrlManager()->createUrl(['/member/usersearch/viewprofile', 'userID' => $searchList->userID]);
                     ?>
                     <tr>
                       <td align="left" valign="top">&nbsp;</td>
-                      <td  align="left" valign="top"> <a href="#"><img src="<?=$profilePath?>" width="100%"></a>
+                      <td  align="left" valign="top"> <a href="#"><img src="<?php echo $profilePath; ?>" width="100%"></a>
                       </td>
                       <td  align="left" valign="top"  class="gray-text">
                         <p> <strong> Age:</strong><?php echo Core::getAgeByDate($searchList->dob)?>  Yrs </p>
-                        <p> <strong> Height:</strong> <?php echo $searchList->height?> ft.</p>
-                        <p> <strong>  Religion:</strong> <?= CustomFunctions::getReligionAssoc()[$searchList->religionID]; ?></p>
-                        <p> <strong> Caste:</strong> <?= CustomFunctions::getCasteAssoc($searchList->religionID)[$searchList->casteID]; ?></p>
-                        <p> <strong>  Location:</strong> <?=$searchList->address?></p>
-                        <p> <strong> Education :</strong> <?= CustomFunctions::getEducationAssoc()[$searchList->education]; ?></p>
-                        <p> <strong> Profession:</strong> <?= CustomFunctions::getOccupationAssoc()[$searchList->occupation]; ?></p>
+                        <p> <strong> Height:</strong> <?php echo $searchList->height; ?> ft.</p>
+                        <p> <strong> Religion:</strong> <?php echo CustomFunctions::getReligionAssoc()[$searchList->religionID]; ?></p>
+                        <p> <strong> Caste:</strong> <?php echo CustomFunctions::getCasteAssoc($searchList->religionID)[$searchList->casteID]; ?></p>
+                        <p> <strong> Location:</strong> <?php echo $searchList->address?></p>
+                        <p> <strong> Education :</strong> <?php echo CustomFunctions::getEducationAssoc()[$searchList->education]; ?></p>
+                        <p> <strong> Profession:</strong> <?php echo CustomFunctions::getOccupationAssoc()[$searchList->occupation]; ?></p>
                         <p>  <strong>Annual Income:</strong> <?php if($searchList->annualIncome == 0){ echo 'Not Entered'; }else{ echo $searchList->annualIncome.' lakhs'; } ?></p>
-                        <a href="#" class="blue-text"> View Full Profile</a> 
+                        <a href="javascript:void(0);" onclick="getModalData('<?php echo $viewProfileUrl; ?>',this);" class="blue-text"> View Full Profile</a> 
                       </td>                  
                     </tr>
                     <tr>

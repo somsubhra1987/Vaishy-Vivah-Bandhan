@@ -112,8 +112,8 @@ use app\lib\CustomFunctions;
                             <tr>
                                 <td>Annual Income : </td>
                                 <td class="name-table"><?php if($model->annualIncome ==0 ){ echo 'Not Entered'; }else{ echo $model->annualIncome.' lakhs'; }?></td>
-                                <td></td>
-                                <td class="name-table"></td>
+                                <td>Gender : </td>
+                                <td class="name-table"><?php echo $model->gender?></td>
                             </tr>
                         </table>
 

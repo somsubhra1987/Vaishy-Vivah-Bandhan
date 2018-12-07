@@ -168,6 +168,31 @@ EOF;
 		return $msg;
 	}
 	
+	public function getFlashMsg()
+	{
+		$msg = "";
+		$type = "";
+		if(Yii::$app->getSession()->hasFlash('error'))
+		{
+			$msg = Yii::$app->getSession()->getFlash('error');
+			$type = "text-red";
+		}
+		elseif(Yii::$app->getSession()->hasFlash('success'))
+		{
+			$msg = Yii::$app->getSession()->getFlash('success');
+			$type = "text-green";
+		}
+		
+		if(strlen($msg))
+		{
+			$msg =<<<EOF
+	<span class="contact-msg $type">$msg</div>
+EOF;
+		}
+		
+		return $msg;
+	}
+	
 	public function getViewLinkCol($attr)
 	{
 		global $viewLinkColAttr;

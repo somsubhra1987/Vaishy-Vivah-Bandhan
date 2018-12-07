@@ -55,7 +55,8 @@ class Core
 	    $sql = "SELECT
 	    			userID as id, 
 	    			firstName as name,
-	    			gender
+	    			gender,
+					dob
 	   			FROM user_master
 	    		WHERE userID = :userID ";
 	    $cmd = $db->createCommand($sql);
@@ -64,6 +65,7 @@ class Core
 	    $user->id =$row['id'];	    
 	    $user->name =$row['name'];
 	    $user->gender =$row['gender'];
+		$user->dob =$row['dob'];
 	    return $user;
 	}
 
@@ -442,6 +444,14 @@ return $error;
 		$countryList = self::getDropdownAssoc($sql);
 		return $countryList;
 	}
+	
+	public function getStateAssoc($countryID)
+	{
+		$sql = "SELECT stateID, state FROM user_state WHERE countryID = '$countryID' ORDER BY state";
+		$countryList = self::getDropdownAssoc($sql);
+		return $countryList;
+	}
+	
 	public function getCountryName($countryID)
 	{
 		$sql = "SELECT country FROM user_country WHERE countryID = :countryID";
@@ -524,7 +534,7 @@ return $error;
 	  			FROM user_uploaded_images WHERE refID = :refID 
 	  			AND refTable = :refTable 
 	  			AND showInDp = '1'
-	  			AND adminVerifiedStatus = '1'
+	  			AND adminVerifiedStatus = '0'
 	  			";
 	  	$fileName = self::getData($sql, array(':refID'=>$refID, ':refTable'=>$refTable));
 	  	if($fileName){

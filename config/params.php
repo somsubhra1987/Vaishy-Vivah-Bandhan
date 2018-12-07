@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'adminEmail' => 'admin@example.com',
+    'adminEmail' => 'info@vaishyvivahbandhan.com',
+	'baseUrl' => 'http://vaishyvivahbandhan.com',
 ];

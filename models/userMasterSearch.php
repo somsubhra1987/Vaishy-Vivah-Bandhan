@@ -22,7 +22,7 @@ class userMasterSearch extends userMaster
     {
         return [
             [['userID', 'isActive'], 'integer'],
-            [['profileID', 'firstName', 'lastName', 'gender', 'dob', 'dob2', 'email', 'userPassword', 'phoneNo', 'address', 'country', 'state', 'city', 'subject', 'personalInfo', 'aboutFamily', 'partnerPreference', 'age', 'age2', 'profileCreatedFor', 'bodyType', 'height', 'physicalStatus', 'height2'], 'safe'],
+            [['profileID', 'firstName', 'lastName', 'gender', 'dob', 'dob2', 'email', 'userPassword', 'phoneNo', 'address', 'country', 'state', 'city', 'subject', 'personalInfo', 'aboutFamily', 'partnerPreference', 'age', 'age2', 'profileCreatedFor', 'bodyType', 'education', 'occupation', 'employmentSector', 'height', 'physicalStatus', 'height2'], 'safe'],
         ];
     }
 
@@ -65,6 +65,12 @@ class userMasterSearch extends userMaster
             'userID' => $this->userID,
             'dob' => $this->dob,
             'isActive' => $this->isActive,
+			'country' => $this->country,
+			'state' => $this->state,
+			'bodyType' => $this->bodyType,
+			'education' => $this->education,
+			'occupation' => $this->occupation,
+			'employmentSector' => $this->employmentSector,
         ]);
 
         $query->andFilterWhere(['like', 'profileID', $this->profileID])
@@ -75,8 +81,6 @@ class userMasterSearch extends userMaster
             ->andFilterWhere(['like', 'userPassword', $this->userPassword])
             ->andFilterWhere(['like', 'phoneNo', $this->phoneNo])
             ->andFilterWhere(['like', 'address', $this->address])
-            ->andFilterWhere(['like', 'country', $this->country])
-            ->andFilterWhere(['like', 'state', $this->state])
             ->andFilterWhere(['like', 'city', $this->city])
             ->andFilterWhere(['like', 'subject', $this->subject])
             ->andFilterWhere(['like', 'personalInfo', $this->personalInfo])
@@ -95,6 +99,13 @@ class userMasterSearch extends userMaster
         ]);
 
         $this->gender = Core::getOpositeGender(Core::getLoggedUser()->gender);
+		
+		if(!$this->age){
+			$this->age = Core::getAgeByDate(Core::getLoggedUser()->dob) - 10;
+		}
+		if(!$this->age2){
+			$this->age2 = Core::getAgeByDate(Core::getLoggedUser()->dob) - 5;
+		}
 
         if($this->age){
             $this->dob = Core::prepareDate($this->age, true);            
@@ -105,7 +116,7 @@ class userMasterSearch extends userMaster
 
         //$query = UserMaster::find()->where('1');
 
-        if($this->age!= '' && $this->age2 != ''){
+        if($this->age!= '' && $this->age2 != ''){#die($this->dob.'-'.$this->dob2);
             $query->andWhere(['between','dob', $this->dob2, $this->dob]);
         }
 
@@ -120,6 +131,31 @@ class userMasterSearch extends userMaster
         if($this->country){
             $query->andWhere(['country'=>$this->country]);
         }
+		
+		if($this->state){
+            $query->andWhere(['state'=>$this->state]);
+        }
+		
+		if($this->city){
+            $query->andWhere(['like', 'city', $this->city]);
+        }
+		
+		if($this->bodyType){
+            $query->andWhere(['bodyType'=>$this->bodyType]);
+        }
+		
+		if($this->education){
+            $query->andWhere(['education'=>$this->education]);
+        }
+		
+		if($this->occupation){
+            $query->andWhere(['occupation'=>$this->occupation]);
+        }
+		
+		if($this->employmentSector){
+            $query->andWhere(['employmentSector'=>$this->employmentSector]);
+        }
+		
         $pagination = new Pagination([
             'defaultPageSize'=>5,
             'totalCount'=>$query->count(),
@@ -167,6 +203,31 @@ class userMasterSearch extends userMaster
         if($this->country){
             $query->andWhere(['country'=>$this->country]);
         }
+		
+		if($this->state){
+            $query->andWhere(['state'=>$this->state]);
+        }
+		
+		if($this->city){
+            $query->andWhere(['like', 'city', $this->city]);
+        }
+		
+		if($this->bodyType){
+            $query->andWhere(['bodyType'=>$this->bodyType]);
+        }
+		
+		if($this->education){
+            $query->andWhere(['education'=>$this->education]);
+        }
+		
+		if($this->occupation){
+            $query->andWhere(['occupation'=>$this->occupation]);
+        }
+		
+		if($this->employmentSector){
+            $query->andWhere(['employmentSector'=>$this->employmentSector]);
+        }
+		
         $pagination = new Pagination([
             'defaultPageSize'=>5,
             'totalCount'=>$query->count(),

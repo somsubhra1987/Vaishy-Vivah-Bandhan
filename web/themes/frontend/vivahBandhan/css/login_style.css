@@ -2785,3 +2785,16 @@ tr,td{ border:1px solid #ddd; padding:8px;}
 }
 
 .f-r{ float:right;}
+
+.profile-modal .modal-header h4{ line-height:normal; font-weight:700; text-transform:uppercase; color:#F4BE1D; font-family: 'Raleway', sans-serif; font-size:20px; }
+
+.profile-modal .modal-header h4 span{ font-size:12px; text-transform:capitalize; font-weight:400; line-height:normal; color:#333; }
+
+
+.profile-modal .modal-body p{ color:#333; font-weight:400; font-size:14px; line-height:24px; font-family: 'Raleway', sans-serif; }
+
+
+.profile-modal .modal-body p strong{ font-weight:600; color:#B98C06; }
+
+
+.totalwidtharea{ padding:15px; background:#F3F3F3; border:1px solid #DDDDDD; }

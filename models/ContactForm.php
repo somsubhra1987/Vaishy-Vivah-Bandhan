@@ -10,11 +10,12 @@ use yii\base\Model;
  */
 class ContactForm extends Model
 {
-    public $name;
+    public $firstName;
+    public $lastName;
     public $email;
-    public $subject;
-    public $body;
-    public $verifyCode;
+    public $query;
+	public $name;
+	public $subject = 'Contact Enquiry';
 
 
     /**
@@ -24,11 +25,9 @@ class ContactForm extends Model
     {
         return [
             // name, email, subject and body are required
-            [['name', 'email', 'subject', 'body'], 'required'],
+            [['firstName', 'lastName', 'email', 'query'], 'required'],
             // email has to be a valid email address
             ['email', 'email'],
-            // verifyCode needs to be entered correctly
-            ['verifyCode', 'captcha'],
         ];
     }
 
@@ -38,9 +37,15 @@ class ContactForm extends Model
     public function attributeLabels()
     {
         return [
-            'verifyCode' => 'Verification Code',
+            'firstName' => 'First Name',
         ];
     }
+	
+	public function beforeSave($query)
+	{
+		$this->name = $this->firstName.' '.$this->lastName;
+		return true;
+	}
 
     /**
      * Sends an email to the specified email address using the information collected by this model.
@@ -54,7 +59,7 @@ class ContactForm extends Model
                 ->setTo($email)
                 ->setFrom([$this->email => $this->name])
                 ->setSubject($this->subject)
-                ->setTextBody($this->body)
+                ->setTextBody($this->query)
                 ->send();
 
             return true;

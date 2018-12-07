@@ -29,9 +29,9 @@ use app\lib\Core;
                 <a href="#" id="myHomeDropdown" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" style="border-right:none;" onmouseover=""> My Home   <span class="fa fa-angle-down"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="<?=Yii::$app->homeUrl?>member">My Profile</a></li>    
-                    <li><a href="#">Who View My Profile</a></li>  
+                    <!--<li><a href="#">Who View My Profile</a></li>-->
                     <li><a href="<?=Yii::$app->urlManager->createUrl(['member/shortlistme'])?>">Who Shortlist Me  </a></li>  
-                    <li><a href="#">Profile I have ignore <strong class="red-text"> (8)</strong>  </a></li> 
+                    <!--<li><a href="#">Profile I have ignore <strong class="red-text"> (8)</strong>  </a></li> -->
                 </ul>
             </li> 
             <?php
@@ -43,11 +43,11 @@ use app\lib\Core;
               <?php  
             }
             ?>       
-            <li><a href="#">Search</a></li>
+            <!--<li><a href="#">Search</a></li>-->
             <li><a href="<?=Yii::$app->urlManager->createUrl(['member/usersearch'])?>">Matches</a></li>
-            <li><a href="#">Message</a></li>
+            <!--<li><a href="#">Message</a></li>
             <li><a href="#"> Services</a></li>
-            <li><a href="#">Help </a></li>
+            <li><a href="#">Help </a></li>-->
             <?php
             if(Core::getLoggedUserID())
             {
@@ -56,9 +56,10 @@ use app\lib\Core;
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="border-right:none;"> My Account   <span class="fa fa-angle-down"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="<?=Yii::$app->homeUrl?>member"><?php echo Core::getLoggedUser()->name;?></a></li>
-                    <li><a href="#">Notifications </a></li>
+                    <!--<li><a href="#">Notifications </a></li>-->
+                    <li><a href="<?=Yii::$app->urlManager->createUrl(['member/default/changepassword', 'id' => Core::getLoggedUser()->id])?>">Change Password </a></li>
                     <li><a href="<?=Yii::$app->homeUrl?>member">Edit Profile </a></li>
-                    <li><a href="<?=Yii::$app->homeUrl?>member">Setting </a></li>
+                    <!--<li><a href="<?=Yii::$app->homeUrl?>member">Setting </a></li>-->
                     <li><a href="<?=Yii::$app->urlManager->createUrl(['site/logout'])?>" data-method = "post">Logout</a></li>
                 </ul>
             </li>

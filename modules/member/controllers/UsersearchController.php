@@ -3,8 +3,10 @@
 namespace app\modules\member\controllers;
 
 use Yii;
+use app\lib\Core;
 use app\models\UserMaster;
 use app\models\userMasterSearch;
+use app\modules\member\models\ViewProfile;
 use app\modules\member\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -79,6 +81,23 @@ class UsersearchController extends Controller
             ]);
         }
     }
+	
+	public function actionViewprofile($userID)
+	{
+		$userDetail = Core::getLoggedUser();
+		$viewDetail = ViewProfile::findOne(['viewedByUserID' => $userDetail->userID, 'viewedUserID' => $userID]);
+		if(empty($viewDetail))
+		{
+			$viewProfileModel = new ViewProfile();
+			$viewProfileModel->viewedByUserID = $userDetail->userID;
+			$viewProfileModel->viewedUserID = $userID;
+			$viewProfileModel->status = 1;
+			$viewProfileModel->save();
+		}
+		return $this->renderAjax('viewProfile',[
+            'userID'=>$userID
+        ]);
+	}
 
     /**
      * Deletes an existing userMaster model.

@@ -14,6 +14,8 @@ use yii\web\UploadedFile;
 use app\lib\Core;
 use app\lib\CustomFunctions;
 use app\lib\Sms;
+use app\lib\VEmail;
+use yii\web\NotFoundHttpException;
 
 class SiteController extends Controller
 {
@@ -118,7 +120,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        $this->layout = "@app/web/themes/frontend/vivahBandhan/templates/Login/Page";        
+        $this->layout = "@app/web/themes/frontend/vivahBandhan/templates/Login/Page";
         $model = new LoginForm();
         if(Yii::$app->request->post())
         {
@@ -159,8 +161,15 @@ class SiteController extends Controller
     public function actionContact()
     {
         $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
+        if ($model->load(Yii::$app->request->post())) {
+			if($model->contact(Yii::$app->params['adminEmail']))
+			{
+            	Yii::$app->session->setFlash('success', 'Successfully Sent');
+			}
+			else
+			{
+				Yii::$app->session->setFlash('warning', 'Not Sent');
+			}
 
             return $this->refresh();
         }
@@ -203,5 +212,80 @@ class SiteController extends Controller
     {
         $stateData = CustomFunctions::getStateAssoc($countryID);
         return json_encode($stateData);
+    }
+	
+	public function actionForgotpassword($emailId)
+	{
+		$userModel = UserMaster::findOne(['email' => $emailId]);
+		if($userModel->profileID != '')
+		{
+			$randNumber = rand(1111, 999999);
+			$userModel->forgotPasswordKey = $randNumber;
+			$userModel->isForgotPasswordKeyExpired = 0;
+			$userModel->save();
+			
+			VEmail::sendForgotPasswordMail($emailId, $userModel->profileID, $randNumber);
+			return json_encode(array('status' => 'success', 'message' => 'Password Reset Link has been sent to your email'));
+		}
+		else
+		{
+			return json_encode(array('status' => 'error', 'message' => 'This email id is not registered with us'));
+		}
+	}
+	
+	public function actionResetpassword($emailID, $profileID, $forgotPasswordKey)
+	{
+		$this->layout = "@app/web/themes/frontend/vivahBandhan/templates/Login/Page";
+		
+		$model = new UserMaster();
+		$userStatus = 0;
+		$userDetail = UserMaster::findOne(['email' => $emailID, 'isForgotPasswordKeyExpired' => 0]);
+		if($userDetail->profileID != '')
+		{
+			$userStatus = 1;
+		}
+		
+        if($model->load(Yii::$app->request->post()))
+        {
+			$userModel = $this->findUserModel($userDetail->userID);
+			$userModel->scenario = 'reset_password';
+			if($model->newPassword != $model->confirmPassword)
+			{
+				Yii::$app->session->setFlash('error', '<div class="text-red">Confirm Password Mismatch</div>');
+			}
+			else
+			{
+				$userModel->newPassword = $model->newPassword;
+				$userModel->confirmPassword = $model->confirmPassword;
+				$userModel->userPassword = $model->confirmPassword;
+				$userModel->isForgotPasswordKeyExpired = 1;
+				
+				$response = array();
+				if ($userModel->save()) {
+					Yii::$app->session->setFlash('success', '<div class="text-green">Password changed Successfully</div>');
+					return $this->redirect(['site/login']);
+				}
+				else{
+					Yii::$app->session->setFlash('error', Core::createErrorlist($userModel->getErrors()));
+				}
+			}
+        }
+        
+        return $this->render('resetpassword', [
+            'model' => $model,
+			'emailID' => $emailID,
+			'profileID' => $profileID,
+			'forgotPasswordKey' => $forgotPasswordKey,
+			'userStatus' => $userStatus,
+        ]);
+	}
+	
+	protected function findUserModel($id)
+    {
+        if (($model = UserMaster::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 }

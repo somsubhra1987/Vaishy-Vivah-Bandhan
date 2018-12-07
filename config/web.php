@@ -43,7 +43,14 @@ $config = [
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
+            //'useFileTransport' => true,
+			'transport' => [
+				'class' => 'Swift_SmtpTransport',
+				'host' => 'vaishyvivahbandhan.com',
+				'username' => 'info@vaishyvivahbandhan.com',
+				'password' => 'xTa&*q_pIDIx',
+				'port' => '25',
+			],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

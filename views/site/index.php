@@ -35,9 +35,9 @@ use app\lib\Cms;
           </div> 
           </div>
            
-          <div class="right">
+          <div class="right div-n">
            <span> <img src="<?php echo Yii::$app->getUrlManager()->getBaseUrl()?>/themes/frontend/vivahBandhan/images/chat--.png"  align="absmiddle"/> &nbsp;  <strong class="click-hare"> 
-           Presented By : </strong> Shri Kanyakub Vaishy Nabayubak Sangh Kolkat West Bengal
+           Presented By : </strong> Shri Kanyakub Vaishy Nabayubak Sangh Kolkata West Bengal
           </span>
            </div>
         </div>
@@ -58,7 +58,7 @@ use app\lib\Cms;
               <h3>Sakshi Gupta And Kailash relan <span class="orange">12th April 2012</span> in Delhi.</h3>
               <div class="clear"></div>
               <p>While I was in Mumbai and Pavini was in Delhi, we exchanged ..<br />
-                 <a href="service.html" class="view-all"><strong>[View More]</strong></a></p>
+                 <a href="<?php echo Yii::$app->getUrlManager()->createUrl(['/site/service']); ?>" class="view-all"><strong>[View More]</strong></a></p>
              </div>
             </div>
             
@@ -68,7 +68,7 @@ use app\lib\Cms;
               <h3>Sakshi Gupta And Kailash relan <span class="orange">12th April 2012</span> in Delhi.</h3>
               <div class="clear"></div>
               <p>While I was in Mumbai and Pavini was in Delhi, we exchanged ....<br />
-                 <a href="service.html" class="view-all"><strong>[View More]</strong></a></p>
+                 <a href="<?php echo Yii::$app->getUrlManager()->createUrl(['/site/service']); ?>" class="view-all"><strong>[View More]</strong></a></p>
              </div>
             </div>
             <p></p>

@@ -20,7 +20,8 @@ class UserMaster extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public $fileName, $height2;
+    public $fileName, $height2, $newPassword, $confirmPassword;
+	public $newEntry = 0;
     public static function tableName()
     {
         return 'user_master';
@@ -33,10 +34,11 @@ class UserMaster extends \yii\db\ActiveRecord
     {
         return [
             [['firstName', 'email'], 'required'],
+			[['newPassword', 'confirmPassword'], 'required', 'on' => 'reset_password'],
             [['phoneNo','address','city', 'dob'], 'required', 'on'=>'registration'],
             [['isActive'], 'integer'],
             [['firstName', 'lastName'], 'string', 'max' => 100],
-            [['userPassword','phoneNo','address','country', 'state', 'city', 'dob', 'subject', 'gender', 'personalInfo', 'aboutFamily','partnerPreference','profileID', 'profileCreatedFor', 'bodyType', 'height','age', 'physicalStatus', 'religionID', 'gothramID', 'casteID', 'annualIncome', 'education', 'employmentSector', 'occupation'],'safe'],
+            [['userPassword','phoneNo','address','country', 'state', 'city', 'dob', 'subject', 'gender', 'personalInfo', 'aboutFamily','partnerPreference','profileID', 'profileCreatedFor', 'bodyType', 'height','age', 'physicalStatus', 'religionID', 'gothramID', 'casteID', 'annualIncome', 'education', 'employmentSector', 'occupation', 'forgotPasswordKey', 'isForgotPasswordKeyExpired', 'newPassword', 'confirmPassword'],'safe'],
             [['email'], 'string', 'max' => 155],
             [['isActive'], 'default', 'value'=>'1'],
             [['lastName'], 'default', 'value'=> ''],            
@@ -72,6 +74,7 @@ class UserMaster extends \yii\db\ActiveRecord
     public function beforeSave()
     {
         if($this->isNewRecord){
+			$this->newEntry = 1;
             $this->profileID = Core::generateProfileID();
             $this->userPassword = rand(10000, 99999);
             $this->createDate = date('Y-m-d'); 
@@ -81,8 +84,12 @@ class UserMaster extends \yii\db\ActiveRecord
 
     public function afterSave()
     {
-        self::uploadImage();
-        VEmail::sendNewRegisterMail($this);
+		self::uploadImage();
+		if($this->newEntry == 1)
+		{
+        	VEmail::sendNewRegisterMail($this);
+		}
+		return true;
     }
 
     function uploadImage()
@@ -125,18 +132,26 @@ class UserMaster extends \yii\db\ActiveRecord
                     
             $fileSaveData = $path.'/upload_images/' . $fileName;
             self::removeFile($fileSaveData);
-
+			
+			$sql = "UPDATE user_uploaded_images SET showInDp = '0' WHERE refID = :refID AND refTable = :refTable";
+			$cmd = $db->createCommand($sql);
+			$cmd->bindValue(':refID', $this->userID);
+			$cmd->bindValue(':refTable', 'user_master');
+			$cmd->execute();
+			
             $this->fileName->saveAs($fileSaveData);
             $sql = "INSERT INTO user_uploaded_images set 
                             fileName = :fileName,
                             refID = :refID,
                             refTable = :refTable,
+							showInDp = :showInDp,
                             adminVerifiedStatus = :adminVerifiedStatus
                     ";
             $cmd = $db->createCommand($sql);
             $cmd->bindValue(':fileName', $fileName);
             $cmd->bindValue(':refID', $this->userID);
             $cmd->bindValue(':refTable', 'user_master');
+			$cmd->bindValue(':showInDp', 1);
             $cmd->bindValue(':adminVerifiedStatus','0');
             $cmd->execute();
 

@@ -2,8 +2,8 @@
 use yii\helpers\Html;
 use app\lib\Core;
 ?>
-<div class="making-area">
-  <div class=" container">
+<div class="making-area div-n">
+  <div class="container">
     <ul>
       <li><a href="#">matrimonial services</a></li>
       <li><a href="#">MATCH MAKING SERVICES</a></li>
@@ -16,17 +16,16 @@ use app\lib\Core;
 <div class="footer-outer">
   <div class="container">
     <div class="footer-nav">
-      <ul>
-        <li><a href="<?php echo Yii::$app->homeUrl;?>" style="padding-left:0px;">Home</a></li>
-        <li><?php echo Html::a('About Us',['site/about']);?></li>
-        <li><?php echo Html::a('Services',['site/service']);?></li>
-        <li><?php echo Html::a('Testiomonials',['site/testimonial']);?></li>
-        <li><?php echo Html::a('Contact',['site/contact']);?></li>
-      </ul>
-      <p>&copy; 2017 All rights reserved by <span class="yellow"> Vaishy Vivah Bandhan </span></p>
+    	<a href="<?php echo Yii::$app->homeUrl;?>" style="padding-left:0px;">Home</a>    |  
+        <?php echo Html::a('About Us',['site/about']);?>   |  
+        <?php echo Html::a('Services',['site/service']);?>   |    
+        <?php echo Html::a('Testiomonials',['site/testimonial']);?>  | 
+        <?php echo Html::a('Contact',['site/contact']);?>
+      
+      	<p>&copy; <?php echo date('Y'); ?> All rights reserved by <span class="yellow"> Vaishy Vivah Bandhan </span></p>
     </div>
     <div class="get-in-touch">Get In Touch With Us !
-      <div class="social"> <a href="<?php echo Core::getSettingsValue('facebook_link'); ?>" class="facebook"></a> <a href="<?php echo Core::getSettingsValue('twitter_link'); ?>" class="twitter"></a> <a href="<?php echo Core::getSettingsValue('gplus_link'); ?>" class="google"></a> <a href="<?php echo Core::getSettingsValue('youtube_link'); ?>" class="you-tube"></a> <a href="<?php echo Core::getSettingsValue('rss_link'); ?>" class="rss"></a> </div>
+      <div class="social"> <a href="<?php echo Core::getSettingsValue('facebook_link'); ?>" target="_blank" class="facebook"></a> <a href="<?php echo Core::getSettingsValue('twitter_link'); ?>" target="_blank" class="twitter"></a> <a href="<?php echo Core::getSettingsValue('gplus_link'); ?>" target="_blank" class="google"></a> <a href="<?php echo Core::getSettingsValue('youtube_link'); ?>" target="_blank" class="you-tube"></a> <a href="<?php echo Core::getSettingsValue('rss_link'); ?>" target="_blank" class="rss"></a> </div>
     </div>
   </div>
 </div>
